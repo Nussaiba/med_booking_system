@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:med_booking_system/controller/patient/profile/create_patient_profile_controller.dart';
@@ -41,10 +40,9 @@ class CreatePatientProfileScreen extends StatelessWidget {
                 controller.pickBirthdate,
               ),
               const SizedBox(height: 14),
-              dropdown(controller.gender, "Gender", [
-                'Male',
-                'Female',
-              ], (val) => controller.gender = val),
+              dropdown(controller.gender, "Gender", 
+              controller.genders
+              , (val) => controller.gender = val),
               const SizedBox(height: 14),
               CustomTextField(
                 mycontroller: controller.phoneController,
@@ -70,9 +68,7 @@ class CreatePatientProfileScreen extends StatelessWidget {
               const SizedBox(height: 40),
               ElevatedButton.icon(
                 onPressed: () {
-                  if (controller.formstate.currentState!.validate()) {
-                    // controller.submitProfile(); // تنفذ حفظ البيانات
-                  }
+                 
                 },
                 icon: const Icon(Icons.save_alt),
                 label: const Text("Save Profile"),

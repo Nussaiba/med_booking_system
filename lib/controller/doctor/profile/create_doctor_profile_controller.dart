@@ -12,7 +12,7 @@ import 'package:med_booking_system/core/services/services.dart';
 import 'package:med_booking_system/data/data_sources/choose_image.dart';
 import 'package:med_booking_system/data/data_sources/remote/doctor/profile/create_doctor_profile_data.dart';
 import 'package:med_booking_system/data/data_sources/remote/doctor/profile/show_by_doctor.dart';
-import 'package:med_booking_system/data/model/doctor/doctor_profilr_model.dart';
+import 'package:med_booking_system/data/model/doctor/doctor_profile_model.dart';
 import 'package:med_booking_system/view/screens/doctor/main_doctor_screens/main_doctor_screens.dart';
 
 abstract class CreateProfileController extends GetxController {

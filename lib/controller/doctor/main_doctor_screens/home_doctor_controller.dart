@@ -4,7 +4,7 @@ import 'package:med_booking_system/core/class/status_request.dart';
 import 'package:med_booking_system/core/functions/handlingdata.dart';
 import 'package:med_booking_system/core/services/services.dart';
 import 'package:med_booking_system/data/data_sources/remote/doctor/doctor_home_data.dart';
-import 'package:med_booking_system/data/model/doctor/doctor_profilr_model.dart';
+import 'package:med_booking_system/data/model/doctor/doctor_profile_model.dart';
 import 'package:med_booking_system/data/model/patient/medical_center_model.dart';
 import 'package:med_booking_system/view/screens/patient/profile/show_center_details.dart';
 

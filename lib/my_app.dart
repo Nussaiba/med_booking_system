@@ -11,6 +11,7 @@ import 'package:med_booking_system/view/screens/patient/booking/booking_from_cen
 import 'package:med_booking_system/view/screens/patient/booking/booking_screen.dart';
 import 'package:med_booking_system/view/screens/patient/main_screen/main_patient_screens.dart';
 import 'package:med_booking_system/view/screens/patient/profile/create_patient_profile.dart';
+import 'package:med_booking_system/view/screens/patient/profile/my_profile_patient.dart';
 import 'package:med_booking_system/view/screens/patient/profile/show_doctor_details_by_other.dart';
 
 class MyApp extends StatelessWidget {
@@ -31,7 +32,8 @@ class MyApp extends StatelessWidget {
       ),
       // home: MainPatientScreens(),
       // home:  MainDoctorScreens(),
-      home: ChooseAccountType(),
+      // home: ChooseAccountType(),
+      home: PatientProfileScreen(),
       getPages: routes,
       initialBinding: InitialBindings(),
 
