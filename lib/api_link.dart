@@ -20,18 +20,30 @@ class AppLink {
   //patient_home
   static const String centers = "$server/patient/centers";
   static const String specialties = "$server/patient/specialties";
-  static const String getDoctorsByCenterAndSpecialty = "$server/patient/profile";
+  static const String getDoctorsByCenterAndSpecialty =
+      "$server/patient/profile";
   static const String getDoctorCenters = "$server/patient/doctors";
   static const String getAvailableSlots = "$server/patient/profile";
-  static const String requestAppointment = "$server/patient/appointment-requests";
-  static const String getAppointmentRequests = "$server/patient/appointment-requests";
+  static const String requestAppointment =
+      "$server/patient/appointment-requests";
+  static const String getAppointmentRequests =
+      "$server/patient/appointment-requests";
 
   //patient_profile
   static const String patientProfile = "$server/patient/profile";
+  //search
+
+  static const String search = "$server/search";
+  static const String advancedSearch = "$server/search/advanced";
+  static const String specialtiesSearch = "$server/search/specialties";
+  static const String doctorsSearch = "$server/search/doctors";
+  static const String centersSearch = "$server/search/centers";
 
   //doctor_profile
 
   static const String doctorRegister = "$server/doctor/register";
 
   static const String doctorProfile = "$server/doctor/profile";
+  static const String doctorCenters = "$server/doctor/centers";
+  
 }

@@ -213,7 +213,7 @@ class DoctorHomeScreen extends StatelessWidget {
                     buildSuggestedClinics(),
                     const SizedBox(height: 20),
                     CustomTitle(title: "Today's Schedule "),
-                    _buildUpcomingAppointments(controller2),
+                    buildUpcomingAppointments(controller2),
                     const SizedBox(height: 20),
                   ],
                 ),
@@ -236,7 +236,7 @@ class DoctorHomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildUpcomingAppointments(MainScreenController controller2) {
+  Widget buildUpcomingAppointments(MainScreenController controller2) {
     return ListView.builder(
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),

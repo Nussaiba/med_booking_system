@@ -1,11 +1,31 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:med_booking_system/core/class/status_request.dart';
+import 'package:med_booking_system/core/constants/image_assest.dart';
 import 'package:med_booking_system/core/functions/handlingdata.dart';
 import 'package:med_booking_system/core/services/services.dart';
 import 'package:med_booking_system/data/data_sources/remote/patient/profile/profile_data.dart';
 import 'package:med_booking_system/data/model/patient/paient_model.dart';
+import 'package:med_booking_system/view/widgets/patient/main_screen_widget/patient_profile_widget.dart';
 
 class ShowPatientProfleController extends GetxController {
+
+
+
+
+
+  var selectedTab = 0.obs;
+  final pageController = PageController();
+
+  void changeTab(int index) {
+    selectedTab.value = index;
+    pageController.animateToPage(
+      index,
+      duration: Duration(milliseconds: 300),
+      curve: Curves.easeInOut,
+    );
+  }
+
   PatientProfileData data = PatientProfileData(Get.find());
   late StatusRequest statusRequest = StatusRequest.none;
   MyServices myServices = Get.find();
@@ -28,14 +48,12 @@ class ShowPatientProfleController extends GetxController {
 
       print(" Paitent  ${patientProfileModel}");
 
-      // doctor = DoctorProfileModel.fromJson(response['data']);
-      // print(doctor?.doctorProfile.specialtyId);
-      // update();
+    
+      update();
 
-      // statusRequest = StatusRequest.success;
-      // print("doctor");
-
-      // print(doctor);
+      statusRequest = StatusRequest.success;
+      
+      print(patientProfileModel);
       // update();
       return patientProfileModel;
     } else {
@@ -51,3 +69,5 @@ class ShowPatientProfleController extends GetxController {
     super.onInit();
   }
 }
+
+

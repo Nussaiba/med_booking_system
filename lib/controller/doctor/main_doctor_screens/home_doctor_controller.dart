@@ -23,11 +23,11 @@ class DoctorHomeControllerImp extends HomeDoctorController {
   List dataDoctorCenters = [];
   List<DoctorCenterModel> doctorCentersList = [];
 
-  getDoctorCenters(String doctorId) async {
+  getDoctorCenters() async {
     dataDoctorCenters.clear();
     doctorCentersList.clear();
     statusRequest = StatusRequest.loading;
-    var response = await homeData.getDoctorCenters(doctorId);
+    var response = await homeData.getDoctorCentersData();
     print("================$response  Controller");
     statusRequest = handlingData(response);
     if (StatusRequest.success == statusRequest) {
@@ -70,7 +70,7 @@ class DoctorHomeControllerImp extends HomeDoctorController {
 
     // getDoctorCenters(doctor.doctorProfile.i);
 
-    getDoctorCenters('2');
+    getDoctorCenters();
 
     // account = myServices.box.read("account");
     // idUserPostOwner = myServices.box.read("id");

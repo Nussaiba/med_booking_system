@@ -5,6 +5,8 @@
 
 
 
+import 'package:med_booking_system/data/model/patient/appointment_model.dart';
+
 class PatientProfileModel {
   final PersonalInfo personal;
   final Appointments appointments;
@@ -83,7 +85,7 @@ class ContactInfo {
 
 class PersonalDetails {
   final String gender;
-  final String birthdate;
+  final DateTime birthdate;
   final int age;
 
   PersonalDetails({
@@ -108,8 +110,8 @@ class PersonalDetails {
 }
 
 class Appointments {
-  final List<Appointment> upcoming;
-  final List<Appointment> old;
+  final List<AppointmentModel> upcoming;
+  final List<AppointmentModel> old;
 
   Appointments({
     required this.upcoming,
@@ -119,9 +121,9 @@ class Appointments {
   factory Appointments.fromJson(Map<String, dynamic> json) {
     return Appointments(
       upcoming: (json['upcoming'] as List)
-          .map((e) => Appointment.fromJson(e))
+          .map((e) => AppointmentModel.fromJson(e))
           .toList(),
-      old: (json['old'] as List).map((e) => Appointment.fromJson(e)).toList(),
+      old: (json['old'] as List).map((e) => AppointmentModel.fromJson(e)).toList(),
     );
   }
 
@@ -131,27 +133,27 @@ class Appointments {
       };
 }
 
-class Appointment {
-  final String? date; // عدلي حسب الحاجة (ممكن dateTime)
-  final String? doctor;
-  final String? department;
+// class Appointment {
+//   final String? date; 
+//   final String? doctor;
+//   final String? department;
 
-  Appointment({this.date, this.doctor, this.department});
+//   Appointment({this.date, this.doctor, this.department});
 
-  factory Appointment.fromJson(Map<String, dynamic> json) {
-    return Appointment(
-      date: json['date'],
-      doctor: json['doctor'],
-      department: json['department'],
-    );
-  }
+//   factory Appointment.fromJson(Map<String, dynamic> json) {
+//     return Appointment(
+//       date: json['date'],
+//       doctor: json['doctor'],
+//       department: json['department'],
+//     );
+//   }
 
-  Map<String, dynamic> toJson() => {
-        'date': date,
-        'doctor': doctor,
-        'department': department,
-      };
-}
+//   Map<String, dynamic> toJson() => {
+//         'date': date,
+//         'doctor': doctor,
+//         'department': department,
+//       };
+// }
 
 class MedicalReport {
   final String? id;

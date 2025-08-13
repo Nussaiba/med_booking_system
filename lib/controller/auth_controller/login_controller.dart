@@ -27,6 +27,20 @@ class LoginControllerImp extends LoginController {
     isShowPassword = isShowPassword == true ? false : true;
     update();
   }
+  
+
+  String doctorRole = "doctor";
+  String patientRole = "patient";
+String currentRole = "patient" ;
+ 
+ updateChoosenType(String role) {
+    currentRole = role;
+    print(
+      "==============================$currentRole===============================",
+    );
+    update();
+  }
+
 
   @override
   login() async {

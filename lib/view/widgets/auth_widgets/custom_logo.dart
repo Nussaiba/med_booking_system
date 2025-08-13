@@ -21,6 +21,7 @@ class CustomTopText extends StatelessWidget {
         ),
         const SizedBox(height: 8),
          Text(
+          textAlign: TextAlign.center,
          text2,
           style: TextStyle(fontSize: 16, color: Colors.white70),
         ),

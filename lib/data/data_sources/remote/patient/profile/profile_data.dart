@@ -34,7 +34,7 @@ class PatientProfileData {
 
   getPatientProfilerData() async {
     print(
-      "==========================${AppLink.patientProfile}==============================",
+      "================kkkkkkkkkkkkkkkkkkkkkkkk==========${AppLink.patientProfile}==============================",
     );
 
     var response = await crud.getData(AppLink.patientProfile);

@@ -32,8 +32,8 @@ class MyApp extends StatelessWidget {
       ),
       // home: MainPatientScreens(),
       // home:  MainDoctorScreens(),
-      // home: ChooseAccountType(),
-      home: PatientProfileScreen(),
+      home: ChooseAccountType(),
+      // home: PatientProfileScreen(),
       getPages: routes,
       initialBinding: InitialBindings(),
 
