@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:med_booking_system/core/class/status_request.dart';
 import 'package:med_booking_system/core/constants/routes.dart';
+import 'package:med_booking_system/core/functions/dialiog_snack.dart';
 import 'package:med_booking_system/core/functions/handlingdata.dart';
 import 'package:med_booking_system/core/services/services.dart';
 import 'package:med_booking_system/data/data_sources/remote/auth/login.dart';
@@ -49,13 +50,13 @@ String currentRole = "patient" ;
       statusRequest = StatusRequest.loading;
       update();
       print("11111111111111111111111111  Controller");
-      var response = await loginData.postdata(email.text, password.text,"patient" );
+      var response = await loginData.postdata(email.text, password.text,currentRole);
 
       print("================$response  Controller");
       statusRequest = handlingData(response);
       print(statusRequest);
       if (StatusRequest.success == statusRequest) {
-      //   if (response["status"] == 200) {
+        if (response["status"] == 200) {
       //     // await loginData.device_token(device_token);
       //     myServices.box.write("token", "${response["data"]["token"]}");
       //     myServices.box.write("id", "${response["data"]["user"]["id"]}");
@@ -90,10 +91,14 @@ String currentRole = "patient" ;
       //         response['message'],
       //         // "Welcolme ${response["data"]["user"]["user_name"]} \nBy : ${response['data']['user']['email']}",
       //         3);
-      //   } else if (response['status'] == 401||response['status'] == 403) {
-      //     getDialog("203".tr, "${response["message"]}");
-      //   }
-      //   update();
+        } else if (response['status'] == 403|| response['status'] == 401) {
+           CustomSnackbar.show(
+          title: "false",
+          message: "${response['message']}",
+          isSuccess: false,
+        );
+        }
+        update();
       // }
     }
   }

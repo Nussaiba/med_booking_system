@@ -34,7 +34,8 @@ class LoginScreen extends StatelessWidget {
                         const SizedBox(height: 20),
                         CustomTopText(
                           text1: "Sign in to your Account",
-                          text2: "enter your email and password to log in \n  chose your role ",
+                          text2:
+                              "enter your email and password to log in \n  chose your role ",
                         ),
                         const SizedBox(height: 30),
                         CustomMainContainer(
@@ -43,7 +44,8 @@ class LoginScreen extends StatelessWidget {
                             // GoogleButton(),
                             // const SizedBox(height: 15),
                             // buildOrAuth(),
-                            RoleOptions(controller: controller,),
+                            const SizedBox(height: 4),
+                            RoleOptions(controller: controller),
                             const SizedBox(height: 10),
                             buildTextFormField(
                               Icons.email,
