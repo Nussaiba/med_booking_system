@@ -5,8 +5,10 @@ import 'package:flutter/widgets.dart';
 class CustomButton extends StatelessWidget {
   final String text;
   final void Function()? onTap;
+  final Color? color;
+   final Color? color2;
   const CustomButton({
-    super.key, required this.text, this.onTap,
+    super.key, required this.text, this.onTap, this.color, this.color2,
   });
 
   @override
@@ -20,7 +22,7 @@ class CustomButton extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 14),
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              colors: [Colors.blue[300]!, Colors.blue[600]!],
+              colors: [color2?? Colors.blue[300]!,color?? Colors.blue[600]!],
               begin: Alignment.centerLeft,
               end: Alignment.centerRight,
             ),

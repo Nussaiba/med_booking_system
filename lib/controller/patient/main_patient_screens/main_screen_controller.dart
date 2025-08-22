@@ -5,33 +5,10 @@ import 'package:med_booking_system/core/constants/image_assest.dart';
 import 'package:med_booking_system/data/data_sources/static/doctor_center.dart';
 import 'package:med_booking_system/data/model/all_model.dart';
 import 'package:med_booking_system/data/model/s.dart';
-import 'package:med_booking_system/view/screens/doctor/main_doctor_screens/doctor_home_screen.dart';
+
 import 'package:med_booking_system/view/widgets/patient/appointment_widgets/appointement_card.dart';
-import 'package:med_booking_system/view/widgets/patient/home_widgets/doctor_card.dart';
-import 'package:med_booking_system/view/widgets/patient/home_widgets/medical_center_card.dart';
 
 class MainScreenController extends GetxController {
-  final List<AppointmentModel> todayAppointments = [
-    AppointmentModel(
-      patientName: "John Doe",
-      startTime: TimeOfDay(hour: 9, minute: 0),
-      endTime: TimeOfDay(hour: 9, minute: 30),
-      status: "Scheduled",
-    ),
-    AppointmentModel(
-      patientName: "Sarah Smith",
-      startTime: TimeOfDay(hour: 10, minute: 0),
-      endTime: TimeOfDay(hour: 10, minute: 30),
-      status: "Completed",
-    ),
-    AppointmentModel(
-      patientName: "Ali Hasan",
-      startTime: TimeOfDay(hour: 11, minute: 0),
-      endTime: TimeOfDay(hour: 11, minute: 30),
-      status: "Cancelled",
-    ),
-  ];
-
   final List<Specialty> specialties = [
     Specialty(icon: FontAwesomeIcons.heart, name: 'Cardiology', id: '1'),
     Specialty(icon: FontAwesomeIcons.tooth, name: 'Dentistry', id: '2'),
@@ -82,7 +59,6 @@ class MainScreenController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-
     pageController = PageController();
     medicalCenters = centersList;
     doctors = doctorsList;

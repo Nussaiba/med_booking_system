@@ -1,13 +1,13 @@
-class Appointment {
+class PatientAppointmentModel {
   final String id;
   final String doctorName;
   final String specialty;
   final String clinicName;
   final DateTime dateTime;
-  final String status; // 'upcoming', 'completed', 'cancelled'
+  final String status; 
   final String imageUrl;
 
-  Appointment({
+  PatientAppointmentModel({
     required this.id,
     required this.doctorName,
     required this.specialty,

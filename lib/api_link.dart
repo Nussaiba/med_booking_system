@@ -31,6 +31,14 @@ class AppLink {
 
   //patient_profile
   static const String patientProfile = "$server/patient/profile";
+
+  static const String ratingsDoctor = "$server/patient/ratings/doctor";
+
+  static const String ratingsCenter = "$server/patient/ratings/center";
+  static const String getratingsDoctor = "$server/patient/ratings/doctors";
+
+  static const String getratingsCenter = "$server/patient/ratings/centers";
+
   //search
 
   static const String search = "$server/search";
@@ -41,9 +49,16 @@ class AppLink {
 
   //doctor_profile
 
-  static const String doctorRegister = "$server/doctor/register";
 
+  static const String doctorInvitations = "$server/doctor/invitations";
+  
+
+  static const String doctorRegister = "$server/doctor/register";
   static const String doctorProfile = "$server/doctor/profile";
   static const String doctorCenters = "$server/doctor/centers";
-  
+  static const String doctorAppointments = "$server/doctor/appointments";
+  static const String doctorPastAppointments =
+      "$server/doctor/past-appointments";
+
+
 }

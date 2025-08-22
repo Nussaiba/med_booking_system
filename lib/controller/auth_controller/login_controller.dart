@@ -45,9 +45,10 @@ String currentRole = "patient" ;
 
   @override
   login() async {
-    int role = 3;
+    int role = 1;
     // if (formstate.currentState!.validate()) {
       statusRequest = StatusRequest.loading;
+      print(currentRole);
       update();
       print("11111111111111111111111111  Controller");
       var response = await loginData.postdata(email.text, password.text,currentRole);
@@ -57,6 +58,11 @@ String currentRole = "patient" ;
       print(statusRequest);
       if (StatusRequest.success == statusRequest) {
         if (response["status"] == 200) {
+           CustomSnackbar.show(
+          title: "success",
+          message: "${response['message']}",
+          isSuccess: true,
+        );
       //     // await loginData.device_token(device_token);
       //     myServices.box.write("token", "${response["data"]["token"]}");
       //     myServices.box.write("id", "${response["data"]["user"]["id"]}");
@@ -81,7 +87,7 @@ String currentRole = "patient" ;
       //         "==========================${response333['status']}===============================================");
 
       //     if ("${response["data"]["user"]["type"]}" == "job_seeker") {
-         role == 1 ?   Get.offAllNamed(AppRoute.mainPatientScreen):  Get.offAllNamed(AppRoute.mainDoctorScreen);
+         currentRole == 'patient' ?   Get.offAllNamed(AppRoute.mainPatientScreen):  Get.offAllNamed(AppRoute.mainDoctorScreen);
       //     } else {
       //       if ("${response["data"]["user"]["type"]}" == "company")
       //         Get.offAllNamed(AppRoute.mainScreensCompany);

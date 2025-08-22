@@ -26,16 +26,18 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       // backgroundColor: Colors.grey[50],
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(165),
+        preferredSize: Size.fromHeight(115),
         child: Padding(
           padding: const EdgeInsets.all(14.0),
           child: Container(
             padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
             child: Column(
               children: [
+                
                 _buildProfileHeader(),
-                const SizedBox(height: 10),
-                _buildSearchBar(),
+
+                // const SizedBox(height: 10),
+                // _buildSearchBar(),
               ],
             ),
           ),
@@ -55,7 +57,6 @@ class HomeScreen extends StatelessWidget {
                     buildSpecialtiesSection(controller.specialtiesList),
                     const SizedBox(height: 20),
 
-                 
                     CustomTitle(title: "Centers"),
 
                     _buildSuggestedClinics(),
@@ -64,7 +65,7 @@ class HomeScreen extends StatelessWidget {
 
                     _buildDoctorsList(maincontroller.doctors),
                     const SizedBox(height: 20),
-                  
+
                     CustomTitle(title: "Upcoming Appointments "),
                     _buildUpcomingAppointments(),
                     const SizedBox(height: 20),

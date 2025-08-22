@@ -25,14 +25,18 @@ class Crud {
     // if (token != null && token.isNotEmpty) {
     //   headers['Authorization'] = 'Bearer $token';
     // }
-
-    String doctorToken = '629|PSY1fErcVYD5rVcymrw7fSKAnnX2KjuA5NcJ0nASf9c5db1f';
+String superAdmun = '1147|Ac8K1kRzCqrRwDe65tjp15EzMHpvYXlOxN4m0WSod66dfc8b';
+    //String doctorToken ='757|OQ9AORy35bH3bR2rHF1bZdANr2dj72Q6gHpVQpPD18255989';
+  // 6 new
+String doctorToken=   '1161|pzJVbOGVVQn5VgCohbugG8RjrTkubHbGe7ramuula964e161';
+    //5 nussaiba doctor      1151|55RUpLmM2bnHDO1MxTyhjrNWBN47ulguOrEGx0d55ecdf8f0
+    //  '629|PSY1fErcVYD5rVcymrw7fSKAnnX2KjuA5NcJ0nASf9c5db1f';
 // 650|xFOPwztcOopnFLsqkemWoXgjKQUIpG2mC1Dvb3nZ48273a2e
 //  1    757|OQ9AORy35bH3bR2rHF1bZdANr2dj72Q6gHpVQpPD18255989  doctor sy
     String patientToken =
         '594|z6kTluKau9a4htxI4VMeayBS6Zj4vkLLo6ZFN0Syccbebcb0';
-    headers['Authorization'] = 'Bearer $patientToken';
-    print(patientToken);
+    headers['Authorization'] = 'Bearer $doctorToken';
+    print(doctorToken);
   }
 
   Future<Either<StatusRequest, Map>> postData(String linkurl, data) async {
@@ -94,6 +98,37 @@ class Crud {
       return const Left(StatusRequest.offlinefailure);
     }
   }
+
+
+
+
+
+
+  Future<Either<StatusRequest, Map>> putData(String linkurl) async {
+    Token();
+    if (await checkInternet()) {
+      var response = await http.put(Uri.parse(linkurl), headers: headers);
+      print(response.statusCode);
+
+      if (response.statusCode == 200 ||
+          response.statusCode == 201 ||
+          response.statusCode == 404) {
+        Map responsebody = jsonDecode(response.body);
+
+        //print(responsebody);
+        print('=======${response}');
+        return Right(responsebody);
+      } else {
+        return const Left(StatusRequest.serverfailure);
+      }
+    } else {
+      return const Left(StatusRequest.offlinefailure);
+    }
+  }
+
+
+
+
 
   Future<Either<StatusRequest, Map>> postFileAndData(
     String linkUrl,

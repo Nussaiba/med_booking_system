@@ -1,200 +1,298 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:intl/intl.dart';
-import 'package:med_booking_system/controller/patient/main_patient_screens/appointements_screen_controller.dart';
-import 'package:med_booking_system/data/model/appointment.dart';
+// import 'package:flutter/material.dart';
+// import 'package:get/get.dart';
+// import 'package:med_booking_system/controller/patient/main_patient_screens/appointements_controller.dart';
+// import 'package:med_booking_system/core/class/handling_view.dart';
+// import 'package:med_booking_system/view/widgets/patient/appointment_widgets/app2_card.dart';
 
-class AppointmentsScreen extends StatelessWidget {
-  final AppointmentController controller = Get.put(AppointmentController());
+// class PatientAppointmentsScreen extends StatelessWidget {
+//   final controller = Get.put(AppointmentController());
+
+//   PatientAppointmentsScreen({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return SafeArea(
+//       child: Scaffold(
+//         backgroundColor: Colors.grey.shade100,
+//         appBar: AppBar(
+//           title: Text(
+//             "Appointments",
+//             style: TextStyle(
+//               fontSize: 15,
+//               fontWeight: FontWeight.w600,
+//               color: Colors.white,
+//               letterSpacing: 0.3,
+//             ),
+//           ),
+//           centerTitle: true,
+//           elevation: 0,
+//           flexibleSpace: Container(
+//             decoration: BoxDecoration(
+//               gradient: LinearGradient(
+//                 colors: [Colors.blue.shade500, Colors.blue.shade700],
+//                 begin: Alignment.topLeft,
+//                 end: Alignment.bottomRight,
+//               ),
+//             ),
+//           ),
+//         ),
+//         body: GetBuilder<AppointmentController>(
+//           builder:
+//               (controller) => Column(
+//                 children: [
+//                   Expanded(
+//                     child: HandlingDataView(
+//                       statusRequest: controller.statusRequest,
+//                       widget: ListView.builder(
+//                         padding: EdgeInsets.symmetric(
+//                           horizontal: 12,
+//                           vertical: 6,
+//                         ),
+//                         itemCount: controller.patientAppointmentsList.length,
+//                         itemBuilder: (context, index) {
+//                           final appt =
+//                               controller.patientAppointmentsList[index];
+//                           return CustomPatientAppointmentCard(
+//                             appt: appt,
+//                             onTap: () {
+
+//                             },
+//                           );
+//                         },
+//                       ),
+//                     ),
+//                   ),
+//                 ],
+//               ),
+//         ),
+//       ),
+//     );
+//   }
+// }
+
+import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
+import 'package:med_booking_system/controller/patient/main_patient_screens/appointements_controller.dart';
+import 'package:med_booking_system/core/class/handling_view.dart';
+import 'package:med_booking_system/view/widgets/patient/appointment_widgets/app2_card.dart';
+
+class PatientAppointmentsScreen extends StatelessWidget {
+  final controller = Get.put(AppointmentController());
+
+  PatientAppointmentsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 2,
+    return SafeArea(
       child: Scaffold(
+        backgroundColor: Colors.grey.shade50,
         appBar: AppBar(
-          title: const Text('مواعيدي'),
-          bottom: const TabBar(
-            tabs: [
-              Tab(text: 'القادمة'),
-              Tab(text: 'السابقة'),
-            ],
-            indicatorColor: Colors.white,
-            labelStyle: TextStyle(fontWeight: FontWeight.bold),
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+
+          title: const SizedBox.shrink(),
+          actions: [_buildFilterDropdown()],
+          flexibleSpace: Center(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 12),
+              child: Text(
+                "My Appointments",
+                style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 16,
+                  color: Colors.black87,
+                ),
+              ),
+            ),
           ),
         ),
-        body: TabBarView(
+
+        body: GetBuilder<AppointmentController>(
+          builder:
+              (controller) => Column(
+                children: [
+                  // Filter selection indicator
+                  if (controller.selectedFilter != 'All')
+                    Container(
+                      width: double.infinity,
+                      padding: EdgeInsets.fromLTRB(16, 6, 16, 0),
+
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.filter_alt,
+                            size: 16,
+                            color: Colors.blue.shade600,
+                          ),
+                          SizedBox(width: 6),
+                          Text(
+                            "Filtering by: ${controller.selectedFilter}",
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Colors.blue.shade700,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  Expanded(
+                    child: HandlingDataView(
+                      statusRequest: controller.statusRequest,
+                      widget: AnimatedSwitcher(
+                        duration: const Duration(milliseconds: 500),
+                        child:
+                            controller.patientAppointmentsList.isEmpty
+                                ? _buildEmptyState()
+                                : ScrollConfiguration(
+                                  behavior: ScrollBehavior().copyWith(
+                                    scrollbars: false,
+                                    overscroll: false,
+                                    physics: const BouncingScrollPhysics(),
+                                  ),
+                                  child: ListView.builder(
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 16,
+                                      vertical: 16,
+                                    ),
+                                    itemCount:
+                                        controller.filtersAppointments.length,
+                                    itemBuilder: (context, index) {
+                                      final appt =
+                                          controller.filtersAppointments[index];
+                                      return AnimatedOpacity(
+                                        duration: Duration(
+                                          milliseconds: 300 + (index * 100),
+                                        ),
+                                        opacity: 1,
+                                        child: Transform.translate(
+                                          offset: Offset(0, 0),
+                                          child: CustomPatientAppointmentCard(
+                                            appt: appt,
+                                            onTap: () {
+                                              // controller.onAppointmentTap(appt);
+                                            },
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildFilterDropdown() {
+    return GetBuilder<AppointmentController>(
+      builder:
+          (controller) => Padding(
+            padding: const EdgeInsets.fromLTRB(0, 0, 12, 0),
+            child: DropdownButtonHideUnderline(
+              child: DropdownButton<String>(
+                icon: Icon(
+                  FontAwesomeIcons.sliders,
+                  color: Colors.black87,
+                  size: 18,
+                ),
+                elevation: 1,
+
+                dropdownColor: Colors.white,
+                borderRadius: BorderRadius.circular(12),
+                onChanged: (String? newValue) {
+                  if (newValue != null) {
+                    controller.filterAppointments(newValue);
+                  }
+                },
+                items:
+                    <String>[
+                      'All',
+                      'Approved',
+                      'Rejected',
+                      'Pending',
+                    ].map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 4,
+                          ),
+                          child: Text(
+                            value,
+                            style: TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                      );
+                    }).toList(),
+              ),
+            ),
+          ),
+    );
+  }
+
+  Widget _buildEmptyState() {
+    return ScrollConfiguration(
+      behavior: ScrollBehavior().copyWith(scrollbars: false),
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            _buildUpcomingAppointments(),
-            _buildPastAppointments(),
+            Icon(
+              Icons.calendar_today_outlined,
+              size: 80,
+              color: Colors.blue.shade300,
+            ),
+            SizedBox(height: 20),
+            Text(
+              "No Appointments Yet",
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+                color: Colors.grey.shade600,
+              ),
+            ),
+            SizedBox(height: 12),
+            Text(
+              "Book your first appointment to get started",
+              style: TextStyle(fontSize: 13, color: Colors.grey.shade500),
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(height: 24),
+            ElevatedButton(
+              onPressed: () {},
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.blue.shade600,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                padding: EdgeInsets.symmetric(horizontal: 24, vertical: 10),
+              ),
+              child: Text(
+                "Book Now",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 13,
+                ),
+              ),
+            ),
           ],
         ),
       ),
     );
   }
-
-  Widget _buildUpcomingAppointments() {
-    return Obx(() => ListView.separated(
-      padding: const EdgeInsets.all(16),
-      itemCount: controller.upcomingAppointments.length,
-      separatorBuilder: (_, __) => const SizedBox(height: 12),
-      itemBuilder: (_, index) => _buildAppointmentCard(
-        controller.upcomingAppointments[index],
-        isUpcoming: true,
-      ),
-    ));
-  }
-
-  Widget _buildPastAppointments() {
-    return Obx(() => ListView.separated(
-      padding: const EdgeInsets.all(16),
-      itemCount: controller.pastAppointments.length,
-      separatorBuilder: (_, __) => const SizedBox(height: 12),
-      itemBuilder: (_, index) => _buildAppointmentCard(
-        controller.pastAppointments[index],
-        isUpcoming: false,
-      ),
-    ));
-  }
-
-  Widget _buildAppointmentCard(Appointment appointment, {required bool isUpcoming}) {
-    return Card(
-      elevation: 4,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15),
-      ),
-      child: InkWell(
-        borderRadius: BorderRadius.circular(15),
-       // onTap: () => Get.to(AppointmentDetailsPage(appointment: appointment)),
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            children: [
-              Row(
-                children: [
-                  // صورة الطبيب
-                  CircleAvatar(
-                    radius: 30,
-                    backgroundImage: NetworkImage(appointment.imageUrl),
-                  ),
-                  const SizedBox(width: 16),
-                  // معلومات الطبيب
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          appointment.doctorName,
-                          style: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Text(
-                          appointment.specialty,
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Colors.grey[600],
-                          ),
-                        ),
-                        Text(
-                          appointment.clinicName,
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Colors.grey[600],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  // حالة الموعد
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                    decoration: BoxDecoration(
-                      color: _getStatusColor(appointment.status),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Text(
-                      _getStatusText(appointment.status),
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 12,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 16),
-              // تاريخ الموعد
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      Icon(Icons.calendar_today, size: 18, color: Colors.blue),
-                      const SizedBox(width: 8),
-                      Text(
-                        DateFormat('dd MMM yyyy').format(appointment.dateTime),
-                        style: const TextStyle(fontSize: 14),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Icon(Icons.access_time, size: 18, color: Colors.blue),
-                      const SizedBox(width: 8),
-                      Text(
-                        DateFormat('hh:mm a').format(appointment.dateTime),
-                        style: const TextStyle(fontSize: 14),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              if (isUpcoming) ...[
-                const SizedBox(height: 16),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    _buildActionButton('إلغاء', Icons.cancel, Colors.red),
-                    _buildActionButton('تعديل', Icons.edit, Colors.blue),
-                    _buildActionButton('تذكير', Icons.notifications, Colors.green),
-                  ],
-                ),
-              ],
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildActionButton(String text, IconData icon, Color color) {
-    return TextButton.icon(
-      icon: Icon(icon, size: 18, color: color),
-      label: Text(text, style: TextStyle(color: color)),
-      onPressed: () {},
-      style: TextButton.styleFrom(
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      ),
-    );
-  }
-
-  Color _getStatusColor(String status) {
-    switch (status) {
-      case 'upcoming': return Colors.blue;
-      case 'completed': return Colors.green;
-      case 'cancelled': return Colors.red;
-      default: return Colors.grey;
-    }
-  }
-
-  String _getStatusText(String status) {
-    switch (status) {
-      case 'upcoming': return 'قادم';
-      case 'completed': return 'مكتمل';
-      case 'cancelled': return 'ملغى';
-      default: return '';
-    }
-  }
 }
+
+
+

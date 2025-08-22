@@ -1,11 +1,11 @@
 class DoctorModel {
   final int id;
-  final int userId;
+  final int ?userId;
   final String name;
   final String specialty;
-  final int experience;
-  final String about;
-  final List<String> workingDays;
+  final int? experience;
+  final String ?about;
+  final List<String?>? workingDays;
 
   DoctorModel({
     required this.id,
@@ -14,7 +14,7 @@ class DoctorModel {
     required this.specialty,
     required this.experience,
     required this.about,
-    required this.workingDays,
+     this.workingDays,
   });
 
   factory DoctorModel.fromJson(Map<String, dynamic> json) {
