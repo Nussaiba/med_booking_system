@@ -162,17 +162,12 @@ import 'package:med_booking_system/data/model/all_model.dart';
 import 'package:med_booking_system/data/model/doctor/doctor_invitation_mode;.dart';
 import 'package:med_booking_system/data/model/doctor/doctor_profile_model.dart';
 import 'package:med_booking_system/data/model/patient/medical_center_model.dart';
-import 'package:med_booking_system/view/screens/patient/profile/show_center_details.dart';
-import 'package:med_booking_system/view/widgets/appointementcard.dart';
+import 'package:med_booking_system/view/screens/patient/show_center_details.dart';
 import 'package:med_booking_system/view/widgets/doctor/appointments_widgets/past_appointments_widgets.dart';
 import 'package:med_booking_system/view/widgets/doctor/doctor_home/app_card.dart';
 import 'package:med_booking_system/view/widgets/patient/appointment_widgets/appointement_card.dart';
 import 'package:med_booking_system/view/widgets/patient/home_widgets/build_specialties_section.dart';
 import 'package:med_booking_system/view/widgets/patient/home_widgets/custom_main_title.dart';
-import 'package:med_booking_system/view/widgets/patient/home_widgets/doctor_card.dart';
-
-import 'package:med_booking_system/view/widgets/patient/home_widgets/medical_center_card.dart';
-
 class DoctorHomeScreen extends StatelessWidget {
   DoctorHomeScreen({super.key});
 

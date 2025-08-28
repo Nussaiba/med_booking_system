@@ -1,7 +1,6 @@
 import 'dart:convert';
 // import 'package:dartz/dartz.dart';
 import 'package:dartz/dartz.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:med_booking_system/core/class/status_request.dart';
@@ -14,6 +13,8 @@ class Crud {
   MyServices myServices = Get.find();
   Map<String, String> headers = {
     "Accept": "application/json",
+  
+  'Content-Type': 'application/json',
     // "Accept-Language": MyServices().box.read("lang") ?? Locale(Get.deviceLocale!.languageCode).toString(),
   };
   Token() {
@@ -25,6 +26,7 @@ class Crud {
     // if (token != null && token.isNotEmpty) {
     //   headers['Authorization'] = 'Bearer $token';
     // }
+    String s = '214|i3OcSzi9eAKweIV9d6HehHhyUStOx3oTzg9L6MU52e11ab60';
 String superAdmun = '1147|Ac8K1kRzCqrRwDe65tjp15EzMHpvYXlOxN4m0WSod66dfc8b';
     //String doctorToken ='757|OQ9AORy35bH3bR2rHF1bZdANr2dj72Q6gHpVQpPD18255989';
   // 6 new
@@ -35,7 +37,7 @@ String doctorToken=   '1161|pzJVbOGVVQn5VgCohbugG8RjrTkubHbGe7ramuula964e161';
 //  1    757|OQ9AORy35bH3bR2rHF1bZdANr2dj72Q6gHpVQpPD18255989  doctor sy
     String patientToken =
         '594|z6kTluKau9a4htxI4VMeayBS6Zj4vkLLo6ZFN0Syccbebcb0';
-    headers['Authorization'] = 'Bearer $doctorToken';
+    headers['Authorization'] = 'Bearer $patientToken';
     print(doctorToken);
   }
 
@@ -104,10 +106,12 @@ String doctorToken=   '1161|pzJVbOGVVQn5VgCohbugG8RjrTkubHbGe7ramuula964e161';
 
 
 
-  Future<Either<StatusRequest, Map>> putData(String linkurl) async {
+  Future<Either<StatusRequest, Map>> putData(String linkurl,   data) async {
+    print("--------------------------------------------------------------------------------");
+    print(data);
     Token();
     if (await checkInternet()) {
-      var response = await http.put(Uri.parse(linkurl), headers: headers);
+      var response = await http.put(Uri.parse(linkurl), headers: headers, body: data);
       print(response.statusCode);
 
       if (response.statusCode == 200 ||

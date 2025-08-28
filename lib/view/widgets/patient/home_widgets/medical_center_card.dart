@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:med_booking_system/core/constants/image_assest.dart';
 import 'package:med_booking_system/data/model/all_model.dart';
 import 'package:med_booking_system/data/model/patient/medical_center_model.dart';
-import 'package:med_booking_system/view/screens/patient/profile/show_center_details.dart';
+import 'package:med_booking_system/view/screens/patient/show_center_details.dart';
 
 class MedicalCenterCard extends StatelessWidget {
   // final CenterModel center;

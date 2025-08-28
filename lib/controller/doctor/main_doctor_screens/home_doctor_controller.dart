@@ -10,7 +10,7 @@ import 'package:med_booking_system/data/model/doctor/doctor_invitation_mode;.dar
 import 'package:med_booking_system/data/model/doctor/doctor_profile_model.dart';
 import 'package:med_booking_system/data/model/patient/medical_center_model.dart';
 import 'package:med_booking_system/view/screens/doctor/appointments_screens/appoinments_details.dart';
-import 'package:med_booking_system/view/screens/patient/profile/show_center_details.dart';
+import 'package:med_booking_system/view/screens/patient/show_center_details.dart';
 
 abstract class HomeDoctorController extends GetxController {}
 
@@ -38,7 +38,7 @@ class DoctorHomeControllerImp extends HomeDoctorController {
       if (response['status'] == 200) {
         print("${dataDoctorCenters.length}lllllllmmmmmmmmmmlllll");
         dataDoctorCenters.addAll(response['data']);
-        print("77777777777777777777777777777777777777777{$dataDoctorCenters}7777777777777777777777777777777777777777777777777777777");
+       
         print(
           "=====================================data====+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++=======================================",
         );

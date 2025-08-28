@@ -9,7 +9,7 @@ import 'package:med_booking_system/data/model/patient/daily_schedule_model.dart'
 import 'package:med_booking_system/data/model/patient/doctor_model.dart';
 import 'package:med_booking_system/data/model/patient/medical_center_model.dart';
 import 'package:med_booking_system/data/model/patient/specialty_model.dart';
-import 'package:med_booking_system/view/screens/patient/profile/show_center_details.dart';
+import 'package:med_booking_system/view/screens/patient/show_center_details.dart';
 
 abstract class PatientHomeController extends GetxController
     with GetSingleTickerProviderStateMixin {

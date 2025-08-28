@@ -10,10 +10,8 @@ import 'package:med_booking_system/core/functions/dialiog_snack.dart';
 import 'package:med_booking_system/core/functions/handlingdata.dart';
 import 'package:med_booking_system/core/services/services.dart';
 import 'package:med_booking_system/data/data_sources/choose_image.dart';
-import 'package:med_booking_system/data/data_sources/remote/doctor/profile/create_doctor_profile_data.dart';
 import 'package:med_booking_system/data/data_sources/remote/doctor/profile/show_by_doctor.dart';
 import 'package:med_booking_system/data/model/doctor/doctor_profile_model.dart';
-import 'package:med_booking_system/view/screens/doctor/main_doctor_screens/main_doctor_screens.dart';
 
 abstract class CreateProfileController extends GetxController {
   createProfile();
@@ -53,15 +51,15 @@ class CreateProfileControllerImp extends CreateProfileController {
         print(
           "=====================================data====+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++=======================================",
         );
-        
+
         CustomSnackbar.show(
           title: "success",
           message: "${response['message']}",
           isSuccess: true,
         );
-       Get.find<MainDoctorScreenController>().selectedIndex.value = 0;
+        Get.find<MainDoctorScreenController>().selectedIndex.value = 0;
         Get.find<MainDoctorScreenController>().onItemClick(0);
-      final controller = Get.find<ShowDoctorProfleController>();
+        final controller = Get.find<ShowDoctorProfleController>();
         controller.getDoctorProfileByDoctor();
         Get.offAllNamed(AppRoute.mainDoctorScreen);
       } else {
@@ -155,7 +153,6 @@ class CreateProfileControllerImp extends CreateProfileController {
 
   @override
   void onClose() {
-    // birthdate - null;
     if (profilePhoto != null) {
       profilePhoto!.delete();
     }

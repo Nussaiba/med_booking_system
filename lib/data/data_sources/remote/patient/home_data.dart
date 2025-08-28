@@ -27,7 +27,7 @@ class PatientHomeData {
 
   getDoctorCenters(String doctorId) async {
     var response = await crud.getData(
-      "${AppLink.getDoctorCenters}/$double/centers",
+      "${AppLink.getDoctorCenters}/$doctorId/centers",
     );
     return response.fold((l) => l, (r) => r);
   }

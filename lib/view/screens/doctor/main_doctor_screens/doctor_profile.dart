@@ -26,13 +26,14 @@ class DoctorProfileScreen extends StatelessWidget {
                   SizedBox(height: 22),
                   ProfileHeader(
                     name: "Dr. ${user?.fullName}",
-                    birthDate: DateTime(1977, 2, 12),
+                    birthDate:user?.birthdate,
                     // imageUrl: user?.profilePhoto,
                     imageUrl: null,
                     isNetworkImage: true,
                     onEdit: () {
                       Get.to(CreateDoctorProfileScreen());
                     },
+                    age: null,
                   ),
 
                   Padding(

@@ -62,7 +62,7 @@ class DoctorHomeData {
     );
 
     var response = await crud.putData(
-    "${AppLink.doctorInvitations}/$invitationId/accept",
+    "${AppLink.doctorInvitations}/$invitationId/accept",{}
     );
     return response.fold((l) => l, (r) => r);
   }
@@ -85,7 +85,7 @@ class DoctorHomeData {
     );
 
     var response = await crud.putData(
-    "${AppLink.doctorInvitations}/$invitationId/reject",
+    "${AppLink.doctorInvitations}/$invitationId/reject",{}
     );
     return response.fold((l) => l, (r) => r);
   }

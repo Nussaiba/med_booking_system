@@ -4,11 +4,12 @@ import 'package:med_booking_system/core/constants/routes.dart';
 
 class ProfileHeader extends StatelessWidget {
   final String name;
-  final DateTime birthDate;
+  final String? birthDate;
   final String? bloodType;
   final String? imageUrl;
   final VoidCallback? onEdit;
   final bool isNetworkImage;
+  final int ?age;
 
   const ProfileHeader({
     Key? key,
@@ -17,12 +18,12 @@ class ProfileHeader extends StatelessWidget {
     this.bloodType,
     this.imageUrl,
     this.onEdit,
-    this.isNetworkImage = false,
+    this.isNetworkImage = false, required this.age,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final int age = DateTime.now().year - birthDate.year;
+    // final int age = DateTime.now().year - birthDate.year;
 
     ImageProvider? imageProvider;
     if (imageUrl != null && imageUrl!.isNotEmpty) {
