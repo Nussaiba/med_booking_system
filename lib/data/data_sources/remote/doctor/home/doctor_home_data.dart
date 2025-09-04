@@ -37,70 +37,36 @@ class DoctorHomeData {
     return response.fold((l) => l, (r) => r);
   }
 
-
-
-
-
   getDoctorInvitationtData() async {
-    
     print(
       "==========================${AppLink.doctorInvitations}==============================",
     );
 
-    var response = await crud.getData(
-      AppLink.doctorInvitations,
-    );
+    var response = await crud.getData(AppLink.doctorInvitations);
     return response.fold((l) => l, (r) => r);
   }
 
-
-
   acceptInvitationData(String invitationId) async {
-    
     print(
       "==========================${AppLink.doctorInvitations}/$invitationId/accept==============================",
     );
 
     var response = await crud.putData(
-    "${AppLink.doctorInvitations}/$invitationId/accept",{}
+      "${AppLink.doctorInvitations}/$invitationId/accept",
+      null,
     );
     return response.fold((l) => l, (r) => r);
   }
 
-
-
-
-
-
-
-
-
-
-
-
   rejectInvitationData(String invitationId) async {
-    
     print(
       "==========================${AppLink.doctorInvitations}/$invitationId/reject==============================",
     );
 
     var response = await crud.putData(
-    "${AppLink.doctorInvitations}/$invitationId/reject",{}
+      "${AppLink.doctorInvitations}/$invitationId/reject",
+      null,
     );
     return response.fold((l) => l, (r) => r);
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

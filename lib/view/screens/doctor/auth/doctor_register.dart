@@ -26,42 +26,48 @@ class DoctorRegisterScreen extends StatelessWidget {
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
-                        const SizedBox(height: 50),
+                        const SizedBox(height: 30),
                         const CustomLogo(),
-                        const SizedBox(height: 20),
+                      
                         CustomTopText(
                           text1: "Doctor Registration",
                           text2: "Fill your details to continue",
                         ),
                         const SizedBox(height: 30),
                         CustomMainContainer(
+                          height: MediaQuery.of(context).size.height*0.78 ,
                           statusRequest: controller.statusRequest,
                           children: [
-                            PageProgressIndicator(totalPages: 2),
+                         PageProgressIndicator(totalPages: 4),
+
                             SizedBox(
-                              height: 380,
+                              height:  MediaQuery.of(context).size.height * 0.48,
                               child: DoctorRegisterPageView(),
                             ),
                             const SizedBox(height: 20),
                             CustomBottonAuth(
                               text:
-                                  controller.currentPage == 1
+                                  controller.currentPage == 3
                                       ? "Complete Registration"
                                       : "Next",
                               onPressed: () {
                                 controller.next();
                               },
                             ),
+
+                            const SizedBox(height: 24),
+
+                            buildBottomRow(
+                              "Already have an account? ",
+                              "Log in",
+                              () {
+                                controller.goToSignIn();
+                              },
+                            ),
                           ],
                         ),
+
                         const SizedBox(height: 20),
-                        buildBottomRow(
-                          "Already have an account? ",
-                          "Log in",
-                          () {
-                            controller.goToSignIn();
-                          },
-                        ),
                       ],
                     ),
                   ),

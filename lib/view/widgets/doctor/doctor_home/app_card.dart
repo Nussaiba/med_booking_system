@@ -117,17 +117,17 @@ final void Function() onTap;
                           color: Colors.grey.shade600,
                         ),
                         SizedBox(width: 4),
-                        Text(
-                          DateFormat(
-                            'MMM d, y - h:mm a',
-                          ).format(appointment.appointmentDate),
-                          style: TextStyle(
-                            fontSize: 10,
-                            color: Colors.grey.shade800,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Spacer(),
+                        // Text(
+                        //   DateFormat(
+                        //     'MMM d, y - h:mm a',
+                        //   ).format(appointment.appointmentDate),
+                        //   style: TextStyle(
+                        //     fontSize: 10,
+                        //     color: Colors.grey.shade800,
+                        //     fontWeight: FontWeight.bold,
+                        //   ),
+                        // ),
+                        // Spacer(),
     
                         //  if (appointment.status == AppointmentStatus.upcoming )  Icon(Icons.edit, size: 16,)
                       ],

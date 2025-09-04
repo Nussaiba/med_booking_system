@@ -65,9 +65,11 @@ class DoctorHomeControllerImp extends HomeDoctorController {
   //   //     arguments: {"opportuntiyModel": opportuntiyModel});
   // }
 
-  goToAppointmentDetails(int id) {
+  goToAppointmentDetails(DoctorAppointmentModel appointment) {
     // print("ddddddddddddddddddddddddddddddddddddddddddd");
-    Get.to(AppointmentDetailsPage(), arguments: {'appointment_id': id});
+    // Get.to(AppointmentDetailsPage(), arguments: {'appointment_id': id});
+     Get.to(AppointmentDetailsPage(), arguments: {'appointment_model': appointment});
+     print("===================$appointment=========================");
   }
 
   DoctorProfileModel? doctor;
@@ -100,7 +102,9 @@ class DoctorHomeControllerImp extends HomeDoctorController {
           );
         }
       } else {
-        // statusRequest = StatusRequest.failure;
+      }  if (response['status'] == 402) {
+
+        doctorAppointmentsList = [];
       }
       update();
     }
@@ -128,8 +132,10 @@ class DoctorHomeControllerImp extends HomeDoctorController {
           doctorInvitationsList.add(
             DoctorInvitationModel.fromJson(dataDoctorInvitations[i]),
           );
-          
+          print("${doctorInvitationsList[i].centerId} ${doctorInvitationsList[i].id} ");
+
         }
+        print(doctorInvitationsList.length);
         
       } else {
         // statusRequest = StatusRequest.failure;
@@ -172,6 +178,11 @@ class DoctorHomeControllerImp extends HomeDoctorController {
     if (StatusRequest.success == statusRequest) {
       if (response['status'] == 200) {
         print({response['data']});
+         CustomSnackbar.show(
+          title: "success",
+          message: "${response['message']}",
+          isSuccess: true,
+        );
       } else {
          getDoctorInvitations();
     // getDoctorCenters();
@@ -190,8 +201,6 @@ class DoctorHomeControllerImp extends HomeDoctorController {
     final controller = Get.put(ShowDoctorProfleController());
     doctor = await controller.getDoctorProfileByDoctor();
 
-    // account = myServices.box.read("account");
-    // idUserPostOwner = myServices.box.read("id");
   }
 
   @override

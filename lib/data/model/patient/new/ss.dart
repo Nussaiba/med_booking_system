@@ -1,67 +1,67 @@
-class SpecialtyModel {
+class SpecialtyWithCentersAndDoctorsModel {
   final int specialtyId;
   final String specialtyName;
-  final List<CenterModel> centers;
+  final List<CenterBySpecialtyModel> centers;
 
-  SpecialtyModel({
+  SpecialtyWithCentersAndDoctorsModel({
     required this.specialtyId,
     required this.specialtyName,
     required this.centers,
   });
 
-  factory SpecialtyModel.fromJson(Map<String, dynamic> json) {
-    return SpecialtyModel(
+  factory SpecialtyWithCentersAndDoctorsModel.fromJson(Map<String, dynamic> json) {
+    return SpecialtyWithCentersAndDoctorsModel(
       specialtyId: json['specialty_id'],
       specialtyName: json['specialty_name'],
       centers: (json['centers'] as List)
-          .map((e) => CenterModel.fromJson(e))
+          .map((e) => CenterBySpecialtyModel.fromJson(e))
           .toList(),
     );
   }
 }
 
-class CenterModel {
+class CenterBySpecialtyModel {
   final int centerId;
   final String centerName;
   final String centerAddress;
-  final List<DoctorModel> doctors;
+  final List<DoctorInCenterModel> doctors;
 
-  CenterModel({
+  CenterBySpecialtyModel({
     required this.centerId,
     required this.centerName,
     required this.centerAddress,
     required this.doctors,
   });
 
-  factory CenterModel.fromJson(Map<String, dynamic> json) {
-    return CenterModel(
+  factory CenterBySpecialtyModel.fromJson(Map<String, dynamic> json) {
+    return CenterBySpecialtyModel(
       centerId: json['center_id'],
       centerName: json['center_name'],
       centerAddress: json['center_address'],
       doctors: (json['doctors'] as List)
-          .map((e) => DoctorModel.fromJson(e))
+          .map((e) => DoctorInCenterModel.fromJson(e))
           .toList(),
     );
   }
 }
 
-class DoctorModel {
+class DoctorInCenterModel {
   final int doctorId;
   final String doctorName;
-  final int experience;
+  final int ?experience;
   final String about;
   final List<WorkingHourModel> workingHours;
 
-  DoctorModel({
+ DoctorInCenterModel ({
     required this.doctorId,
     required this.doctorName,
-    required this.experience,
+     this.experience,
     required this.about,
     required this.workingHours,
   });
 
-  factory DoctorModel.fromJson(Map<String, dynamic> json) {
-    return DoctorModel(
+  factory DoctorInCenterModel.fromJson(Map<String, dynamic> json) {
+    return DoctorInCenterModel(
       doctorId: json['doctor_id'],
       doctorName: json['doctor_name'],
       experience: json['experience'],

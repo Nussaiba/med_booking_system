@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:med_booking_system/core/constants/image_assest.dart';
 import 'package:med_booking_system/data/model/patient/medical_center_model.dart';
+import 'package:med_booking_system/data/model/patient/new/ss.dart';
 import 'package:med_booking_system/view/screens/patient/show_center_details.dart';
 
-class MedicalCenterCard extends StatelessWidget {
+class MedicalCenterBySpecialtyCard extends StatelessWidget {
  
-  final MedicalCenterModel center;
-  const MedicalCenterCard({required this.center});
+  final CenterBySpecialtyModel center;
+  const MedicalCenterBySpecialtyCard({required this.center});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,7 @@ class MedicalCenterCard extends StatelessWidget {
         Get.to(CenterDetailsScreen(), arguments: {
           
          
-          'center_id': center.id});
+          'center_id': center.centerId});
       },
       child: SizedBox(
         width: Get.width * .88,
@@ -75,7 +76,7 @@ class MedicalCenterCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    center.name,
+                    center.centerName,
                     style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -111,7 +112,7 @@ class MedicalCenterCard extends StatelessWidget {
                   Icon(Icons.location_on, size: 16, color: Colors.grey),
                   SizedBox(width: 4),
                   Text(
-                    center.address,
+                    center.centerAddress,
                     style: TextStyle(fontSize: 12, color: Colors.grey[600]),
                   ),
                 ],

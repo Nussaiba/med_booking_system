@@ -1,15 +1,13 @@
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:med_booking_system/controller/aapointmwnts_controller/past_appointments_controller.dart';
 import 'package:med_booking_system/core/constants/image_assest.dart';
 import 'package:med_booking_system/data/model/doctor/doctor_appointment_model.dart';
 
-
 class CustomAppointmentCard extends StatelessWidget {
-  final DoctorAppointmentModel appt; 
+  final DoctorAppointmentModel appt;
   final void Function()? onTap;
-  const CustomAppointmentCard({ required this.appt, this.onTap}) ;
+  const CustomAppointmentCard({required this.appt, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -17,41 +15,35 @@ class CustomAppointmentCard extends StatelessWidget {
       onTap: onTap,
       child: Card(
         margin: EdgeInsets.symmetric(vertical: 4),
-         elevation: 0,
-         color:  Colors.blue.shade400.withOpacity(0.04),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-        side: BorderSide(color: Colors.grey.shade200, width: 1),
-      ),
-       
+        elevation: 0,
+        color: Colors.blue.shade400.withOpacity(0.04),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+          side: BorderSide(color: Colors.grey.shade200, width: 1),
+        ),
+
         child: Padding(
           padding: const EdgeInsets.all(12),
           child: Row(
             children: [
-             
               CircleAvatar(
                 radius: 26,
                 backgroundColor: const Color.fromRGBO(187, 222, 251, 1),
                 backgroundImage:
                 //  appt.user.profilePhoto != null
-                    // ? NetworkImage(appt.user.profilePhoto!)
-                    // :
-                     AssetImage(AppImageAsset.center1) ,
+                // ? NetworkImage(appt.user.profilePhoto!)
+                // :
+                AssetImage(AppImageAsset.center1),
               ),
 
-
-
-
-              
               SizedBox(width: 12),
-      
-             
+
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      appt.user.fullName,
+                      appt.patient.fullName,
                       style: TextStyle(
                         fontWeight: FontWeight.w600,
                         fontSize: 14,
@@ -59,11 +51,13 @@ class CustomAppointmentCard extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: 6),
-                  
+
                     Row(
                       children: [
                         Text(
-                          DateFormat('dd MMM yyyy').format(appt.appointmentDate),
+                          DateFormat(
+                            'dd MMM yyyy',
+                          ).format(appt.appointmentDate),
                           style: TextStyle(
                             fontSize: 11,
                             fontWeight: FontWeight.w600,
@@ -72,14 +66,17 @@ class CustomAppointmentCard extends StatelessWidget {
                         ),
                         SizedBox(width: 8),
                         Container(
-                          padding:
-                              EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 6,
+                            vertical: 2,
+                          ),
                           decoration: BoxDecoration(
                             color: Colors.blue.withOpacity(0.2),
                             borderRadius: BorderRadius.circular(6),
                           ),
                           child: Text(
-                            appt.appointmentTime!= null ?  appt.appointmentTime!.substring(0,5) : "Not set",
+                            DateFormat('hh:mm a').format(appt.appointmentDate),
+
                             style: TextStyle(
                               fontSize: 10,
                               fontWeight: FontWeight.bold,
@@ -92,20 +89,30 @@ class CustomAppointmentCard extends StatelessWidget {
                     SizedBox(height: 6),
                     Row(
                       children: [
-                        Icon(Icons.check_circle, size: 14, color: Colors.green.shade400),
+                        Icon(
+                          Icons.check_circle,
+                          size: 14,
+                          color: Colors.green.shade400,
+                        ),
                         SizedBox(width: 4),
                         Text(
                           appt.status,
-                          style: TextStyle(fontSize: 12, color: Colors.grey.shade700),
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Colors.grey.shade700,
+                          ),
                         ),
                       ],
                     ),
                   ],
                 ),
               ),
-      
-             
-              Icon(Icons.arrow_forward_ios, color: Colors.blue.shade400, size: 16),
+
+              Icon(
+                Icons.arrow_forward_ios,
+                color: Colors.blue.shade400,
+                size: 16,
+              ),
             ],
           ),
         ),
@@ -113,15 +120,6 @@ class CustomAppointmentCard extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
-
-
-
-
 
 class FilterSection<T> extends StatelessWidget {
   final T controller;
@@ -184,12 +182,15 @@ class FilterSection<T> extends StatelessWidget {
                 onPressed: onTodayPressed,
                 child: Text(
                   "Today",
-                  style: TextStyle(fontSize: 12,fontWeight: FontWeight.bold, color: Colors.white),
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ),
 
-       
           ElevatedButton.icon(
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.blue.shade500,
@@ -197,7 +198,7 @@ class FilterSection<T> extends StatelessWidget {
                 borderRadius: BorderRadius.circular(18),
               ),
               elevation: 0,
-              padding: EdgeInsets.symmetric(horizontal:8, vertical: 0),
+              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 0),
             ),
             onPressed: onSelectDate,
             icon: Icon(Icons.date_range, color: Colors.white, size: 16),
@@ -205,11 +206,14 @@ class FilterSection<T> extends StatelessWidget {
               selectedDate != null
                   ? DateFormat('dd MMM').format(selectedDate!)
                   : "Select",
-              style: TextStyle(fontSize: 12,fontWeight: FontWeight.bold, color: Colors.white),
+              style: TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
             ),
           ),
 
-          
           if (selectedDate != null && onClear != null)
             IconButton(
               icon: Icon(Icons.clear, color: Colors.redAccent, size: 18),

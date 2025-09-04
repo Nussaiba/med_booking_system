@@ -13,38 +13,29 @@ class Crud {
   MyServices myServices = Get.find();
   Map<String, String> headers = {
     "Accept": "application/json",
-  
-  'Content-Type': 'application/json',
+    // "Content-Type": "application/json"
     // "Accept-Language": MyServices().box.read("lang") ?? Locale(Get.deviceLocale!.languageCode).toString(),
   };
   Token() {
-    // String? token = myServices.box.read("token");
-    // print("$token qqqqqqqqqqq");
-
+    String? token = myServices.box.read("token");
+    print("$token token");
     // print(
     //     "${MyServices().box.read("lang")}llllllllaaaaaaaaaaannnnnnnggggggggg");
-    // if (token != null && token.isNotEmpty) {
-    //   headers['Authorization'] = 'Bearer $token';
-    // }
-    String s = '214|i3OcSzi9eAKweIV9d6HehHhyUStOx3oTzg9L6MU52e11ab60';
-String superAdmun = '1147|Ac8K1kRzCqrRwDe65tjp15EzMHpvYXlOxN4m0WSod66dfc8b';
-    //String doctorToken ='757|OQ9AORy35bH3bR2rHF1bZdANr2dj72Q6gHpVQpPD18255989';
-  // 6 new
-String doctorToken=   '1161|pzJVbOGVVQn5VgCohbugG8RjrTkubHbGe7ramuula964e161';
-    //5 nussaiba doctor      1151|55RUpLmM2bnHDO1MxTyhjrNWBN47ulguOrEGx0d55ecdf8f0
-    //  '629|PSY1fErcVYD5rVcymrw7fSKAnnX2KjuA5NcJ0nASf9c5db1f';
-// 650|xFOPwztcOopnFLsqkemWoXgjKQUIpG2mC1Dvb3nZ48273a2e
-//  1    757|OQ9AORy35bH3bR2rHF1bZdANr2dj72Q6gHpVQpPD18255989  doctor sy
-    String patientToken =
-        '594|z6kTluKau9a4htxI4VMeayBS6Zj4vkLLo6ZFN0Syccbebcb0';
-    headers['Authorization'] = 'Bearer $patientToken';
-    print(doctorToken);
+    if (token != null && token.isNotEmpty) {
+      headers['Authorization'] = 'Bearer $token';
+    }
+    // String doctorToken =      '15|jGdVaWrOppfkwAoQqjdyZbtkUdYwuXfTY0zlzfQkd197e947';
+    // // String patientToken =
+    // //     '10|g3u4tQKeAUN4L9Av9Hu8coCIvaBrRj9uyqDt2c0Mc4af5709';
+    //     //reem
+    //     String patientToken = '45|xyMC11a5e2dlm9v3u38uHhVO0irhSP5u7hYpEn4nc4ac4142';
+    headers['Authorization'] = 'Bearer $token';
+    print(token);
   }
 
   Future<Either<StatusRequest, Map>> postData(String linkurl, data) async {
     try {
       if (await checkInternet()) {
-        print("sssssssssss");
         Token();
         var response = await http.post(
           Uri.parse(linkurl),
@@ -60,6 +51,7 @@ String doctorToken=   '1161|pzJVbOGVVQn5VgCohbugG8RjrTkubHbGe7ramuula964e161';
             response.statusCode == 401 ||
             response.statusCode == 404 ||
             response.statusCode == 403 ||
+            response.statusCode == 409 ||
             response.statusCode == 400 ||
             response.statusCode == 422 ||
             response.statusCode == 500) {
@@ -87,6 +79,8 @@ String doctorToken=   '1161|pzJVbOGVVQn5VgCohbugG8RjrTkubHbGe7ramuula964e161';
 
       if (response.statusCode == 200 ||
           response.statusCode == 201 ||
+          response.statusCode == 402 ||
+           response.statusCode == 403 ||
           response.statusCode == 404) {
         Map responsebody = jsonDecode(response.body);
 
@@ -101,17 +95,49 @@ String doctorToken=   '1161|pzJVbOGVVQn5VgCohbugG8RjrTkubHbGe7ramuula964e161';
     }
   }
 
-
-
-
-
-
-  Future<Either<StatusRequest, Map>> putData(String linkurl,   data) async {
-    print("--------------------------------------------------------------------------------");
+  Future<Either<StatusRequest, Map>> patchData(String linkurl, data) async {
+    headers['Content-Type'] = 'application/json';
+    print(headers);
+    print("hearer");
     print(data);
     Token();
     if (await checkInternet()) {
-      var response = await http.put(Uri.parse(linkurl), headers: headers, body: data);
+      var response = await http.patch(
+        Uri.parse(linkurl),
+        headers: headers,
+        body: data,
+      );
+      print(response.statusCode);
+
+      if (response.statusCode == 200 ||
+          response.statusCode == 201 ||
+          response.statusCode == 422 ||
+          response.statusCode == 404) {
+        Map responsebody = jsonDecode(response.body);
+
+        //print(responsebody);
+        print('=======${response}');
+        return Right(responsebody);
+      } else {
+        return const Left(StatusRequest.serverfailure);
+      }
+    } else {
+      return const Left(StatusRequest.offlinefailure);
+    }
+  }
+
+  Future<Either<StatusRequest, Map>> putData(String linkurl, data) async {
+    print(
+      "--------------------------------------------------------------------------------",
+    );
+    print(data);
+    Token();
+    if (await checkInternet()) {
+      var response = await http.put(
+        Uri.parse(linkurl),
+        headers: headers,
+        body: data,
+      );
       print(response.statusCode);
 
       if (response.statusCode == 200 ||
@@ -129,10 +155,6 @@ String doctorToken=   '1161|pzJVbOGVVQn5VgCohbugG8RjrTkubHbGe7ramuula964e161';
       return const Left(StatusRequest.offlinefailure);
     }
   }
-
-
-
-
 
   Future<Either<StatusRequest, Map>> postFileAndData(
     String linkUrl,

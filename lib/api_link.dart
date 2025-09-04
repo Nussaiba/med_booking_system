@@ -1,5 +1,5 @@
 class AppLink {
-  static const String serverimage = "https://medical.doctorme.site/api";
+  static const String serverimage = "https://medical.doctorme.site/storage";
 
   static const String server = "https://medical.doctorme.site/api";
 
@@ -30,6 +30,11 @@ class AppLink {
       "$server/patient/appointment-requests";
 
   //patient_profile
+
+  static const String cancelPendingAppointment = "$server/appointments";
+  static const String getCenterDetails = "$server/centers";
+  static const String getCentersAndDoctorsBySpecialty = "$server/specialties";
+
   static const String patientProfile = "$server/patient/profile";
 
   static const String ratingsDoctor = "$server/patient/ratings/doctor";
@@ -49,9 +54,7 @@ class AppLink {
 
   //doctor_profile
 
-
   static const String doctorInvitations = "$server/doctor/invitations";
-  
 
   static const String doctorRegister = "$server/doctor/register";
   static const String doctorProfile = "$server/doctor/profile";
@@ -59,6 +62,4 @@ class AppLink {
   static const String doctorAppointments = "$server/doctor/appointments";
   static const String doctorPastAppointments =
       "$server/doctor/past-appointments";
-
-
 }

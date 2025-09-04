@@ -1,12 +1,13 @@
 import 'dart:io';
-
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:med_booking_system/core/class/status_request.dart';
 import 'package:med_booking_system/core/constants/routes.dart';
+import 'package:med_booking_system/core/functions/dialiog_snack.dart';
 import 'package:med_booking_system/core/functions/handlingdata.dart';
 import 'package:med_booking_system/core/services/services.dart';
+import 'package:med_booking_system/data/data_sources/choose_image.dart';
 import 'package:med_booking_system/data/data_sources/remote/auth/register.dart';
 
 abstract class DoctorRegisterController extends GetxController {
@@ -17,46 +18,74 @@ abstract class DoctorRegisterController extends GetxController {
 
 class DoctorRegisterControllerImp extends DoctorRegisterController {
   File? certificateFile;
-chooseCertificateFile() async {
-              FilePickerResult? result = await FilePicker.platform.pickFiles(
-                type: FileType.custom,
-                allowedExtensions: ['pdf', 'jpg', 'jpeg', 'png'],
-              );
-              if (result != null && result.files.single.path != null) {
-                setCertificateFile(File(result.files.single.path!));
-              }
-            }
-void setCertificateFile(File file) {
-  certificateFile = file;
-  update(); // لازم حتى يتحدث الواجهة
-}
+  chooseCertificateFile() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['pdf', 'jpg', 'jpeg', 'png'],
+    );
+    if (result != null && result.files.single.path != null) {
+      setCertificateFile(File(result.files.single.path!));
+    }
+  }
+
+  void setCertificateFile(File file) {
+    certificateFile = file;
+    update();
+  }
 
   GlobalKey<FormState> formstate = GlobalKey<FormState>();
-  late TextEditingController username;
+ late TextEditingController username;
   late TextEditingController email;
   late TextEditingController password;
   late TextEditingController repassword;
   late TextEditingController phone;
+  late TextEditingController address;
+  late TextEditingController aboutMe;
+  late TextEditingController yearsOfExperience;
+  late TextEditingController appointmentDuration;
   final PageController pageController = PageController();
   int currentPage = 0;
 
   bool isShowPassword = true;
+   bool isShowRePassword = true;
   StatusRequest statusRequest = StatusRequest.none;
   SignUpData signUpData = SignUpData(Get.find());
   MyServices myServices = Get.find();
 
-  final TextEditingController specialtyController = TextEditingController();
-  final TextEditingController certificateController = TextEditingController();
 
+  String? gender;
+  DateTime? birthdate;
+  File? profilePhoto;
+  String specialty= 'Cardiology';
+  final List<String> genders = ['male', 'female'];
   final List<String> specialties = [
     'Cardiology',
     'Dermatology',
     'Neurology',
     'Pediatrics',
-    'General Medicine',
   ];
-  String? selectedSpecialty;
+  ImageAndFileData imageData = ImageAndFileData();
 
+ 
+  getImage() async {
+    profilePhoto = await imageData.getImageData();
+    update();
+  }
+
+  Future<void> pickBirthdate() async {
+    final picked = await showDatePicker(
+      context: Get.context!,
+      initialDate: DateTime(1990),
+      firstDate: DateTime(1950),
+      lastDate: DateTime.now(),
+    );
+    if (picked != null) {
+      birthdate = picked;
+      update();
+    } else {
+      birthdate = null;
+    }
+  }
   nextPage(int page) {
     currentPage = page;
     pageController.animateToPage(
@@ -67,14 +96,11 @@ void setCertificateFile(File file) {
   }
 
   next() {
-  
-
-    if (currentPage ==1) {
+    if (currentPage == 3) {
       print("doctor register");
-        signUp() ;
-
+      signUp();
     } else {
-        currentPage++;
+      currentPage++;
       pageController.animateToPage(
         currentPage,
         duration: const Duration(microseconds: 700),
@@ -90,7 +116,7 @@ void setCertificateFile(File file) {
   }
 
   onSpecialtyChanged(val) {
-    selectedSpecialty = val;
+    specialty = val;
     update();
   }
 
@@ -106,6 +132,26 @@ void setCertificateFile(File file) {
     update();
   }
 
+
+
+
+  @override
+  showRePassWord() {
+    isShowRePassword = isShowRePassword == true ? false : true;
+
+    update();
+  }
+
+
+
+
+
+
+
+
+
+
+
   @override
   signUp() async {
     //   if (formstate.currentState!.validate()) {
@@ -118,10 +164,20 @@ void setCertificateFile(File file) {
       email.text,
       phone.text,
       repassword.text,
-      certificateFile!
-     
+      certificateFile!,
+      profilePhoto,
+        birthdate.toString().substring(0, 10),
+      gender!,
+      address.text,
+      aboutMe.text,
+      "1",
+      // selectedSpecialty,
+      yearsOfExperience.text,
+      appointmentDuration.text,
     );
     print("================$response  Controller");
+    Get.snackbar(response['success'].toString(), response['errors'].toString());
+    print(response['errors']);
     statusRequest = handlingData(response);
     print(statusRequest);
     print(response);
@@ -132,6 +188,11 @@ void setCertificateFile(File file) {
       //     if (response['status'] == 200) {
       //       myServices.box.write("account", accountType.value);
       //       // myServices.box.write("step", "2");
+       CustomSnackbar.show(
+          title: "success",
+          message: "${response['message']}",
+          isSuccess: true,
+        );
       Get.offNamed(
         AppRoute.verifyCodeRegister,
         arguments: {"email": email.text},
@@ -162,6 +223,14 @@ void setCertificateFile(File file) {
     repassword = TextEditingController();
     phone = TextEditingController();
 
+
+
+
+    address = TextEditingController();
+    aboutMe = TextEditingController();
+    yearsOfExperience = TextEditingController();
+    appointmentDuration = TextEditingController();
+
     super.onInit();
   }
 
@@ -173,6 +242,21 @@ void setCertificateFile(File file) {
     repassword.dispose();
     phone.dispose();
 
+    address.dispose();
+    aboutMe.dispose();
+    yearsOfExperience.dispose();
     super.dispose();
   }
+  
+  @override
+  void onClose() {
+    if (profilePhoto != null) {
+      profilePhoto!.delete();
+    }
+    if (certificateFile != null) {
+      certificateFile!.delete();
+    }
+    super.onClose();
+  }
+
 }

@@ -39,7 +39,7 @@ class CenterDetailsModel {
 class SpecialtyModel {
   final int id;
   final String name;
-  final List<DoctorModel> doctors;
+  final List<DoctorCenterModel> doctors;
 
   SpecialtyModel({
     required this.id,
@@ -52,7 +52,7 @@ class SpecialtyModel {
       id: json['id'],
       name: json['name'],
       doctors: (json['doctors'] as List)
-          .map((e) => DoctorModel.fromJson(e))
+          .map((e) => DoctorCenterModel.fromJson(e))
           .toList(),
     );
   }
@@ -66,7 +66,7 @@ class SpecialtyModel {
   }
 }
 
-class DoctorModel {
+class DoctorCenterModel {
   final int id;
   final String name;
   final String specialty;
@@ -74,7 +74,7 @@ class DoctorModel {
   final String about;
   final List<WorkingHourModel> workingHours;
 
-  DoctorModel({
+  DoctorCenterModel({
     required this.id,
     required this.name,
     required this.specialty,
@@ -83,8 +83,8 @@ class DoctorModel {
     required this.workingHours,
   });
 
-  factory DoctorModel.fromJson(Map<String, dynamic> json) {
-    return DoctorModel(
+  factory DoctorCenterModel.fromJson(Map<String, dynamic> json) {
+    return DoctorCenterModel(
       id: json['id'],
       name: json['name'],
       specialty: json['specialty'],

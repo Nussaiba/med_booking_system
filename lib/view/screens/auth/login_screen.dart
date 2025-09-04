@@ -2,15 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:med_booking_system/controller/auth_controller/login_controller.dart';
 import 'package:med_booking_system/core/class/handling_view.dart';
-import 'package:med_booking_system/core/constants/routes.dart';
 import 'package:med_booking_system/core/functions/validinput.dart';
 import 'package:med_booking_system/view/widgets/auth_widgets/choose_role_login.dart';
 import 'package:med_booking_system/view/widgets/auth_widgets/custom_background.dart';
 import 'package:med_booking_system/view/widgets/auth_widgets/custom_bottom_row.dart';
 import 'package:med_booking_system/view/widgets/auth_widgets/custom_logo.dart';
 import 'package:med_booking_system/view/widgets/auth_widgets/custom_or.dart';
-import 'package:med_booking_system/view/widgets/auth_widgets/custom_text_field_auth.dart';
-
+import 'package:med_booking_system/view/widgets/auth_widgets/register_widdets.dart';
 import 'package:med_booking_system/view/widgets/patient/home_widgets/custom_button_auth.dart';
 import 'package:med_booking_system/view/widgets/patient/home_widgets/custom_main_container.dart';
 
@@ -39,6 +37,7 @@ class LoginScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: 30),
                         CustomMainContainer(
+                          height:  MediaQuery.of(context).size.height * 0.56,
                           statusRequest: controller.statusRequest,
                           children: [
                             // GoogleButton(),
@@ -73,13 +72,13 @@ class LoginScreen extends StatelessWidget {
                                 return isPasswordCompliant(value!);
                               },
                             ),
-                            const SizedBox(height: 10),
+                          
                             RowRememberMeAndForgetPassword(
                               onPressed: () {
                                 controller.goToForgetPassword();
                               },
                             ),
-                            const SizedBox(height: 20),
+                            const SizedBox(height: 8),
                             CustomBottonAuth(
                               text: "LOG IN",
                               onPressed: () {
@@ -92,7 +91,7 @@ class LoginScreen extends StatelessWidget {
                               "Don't have an account? ",
                               "Sign Up",
                               () {
-                                Get.toNamed(AppRoute.patientRegister);
+                               controller.goToSignUp();
                               },
                             ),
                           ],

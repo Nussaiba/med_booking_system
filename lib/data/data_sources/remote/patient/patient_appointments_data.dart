@@ -14,4 +14,23 @@ class PatientAppointmentsData {
     return response.fold((l) => l, (r) => r);
   }
 
+
+
+
+  cancelPendingAppointment(String appointmentId) async {
+    print(
+      "==========================${AppLink.cancelPendingAppointment}/$appointmentId/cancel==============================",
+    );
+
+    var response = await crud.patchData(
+      "${AppLink.cancelPendingAppointment}/$appointmentId/cancel",
+      null,
+    );
+    return response.fold((l) => l, (r) => r);
+  }
+
+
+
+
+
 }

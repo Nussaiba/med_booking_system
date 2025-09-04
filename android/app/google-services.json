@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "993384230410",
+    "project_id": "med-booking-system",
+    "storage_bucket": "med-booking-system.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:993384230410:android:62ac7f73cb032acc7f79f3",
+        "android_client_info": {
+          "package_name": "com.example.med_booking_system"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4PU3-ToddNC-bwLN-bBz57PntWREkIMo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

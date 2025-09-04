@@ -4,8 +4,8 @@ import 'package:med_booking_system/core/functions/handlingdata.dart';
 import 'package:med_booking_system/core/services/services.dart';
 import 'package:med_booking_system/data/data_sources/remote/doctor/home/doctor_home_data.dart';
 import 'package:med_booking_system/data/model/doctor/doctor_appointment_model.dart';
-import '../../core/class/crud.dart';
 import '../../core/class/status_request.dart';
+
 
 class CurrentAppointmentsController extends GetxController {
   DoctorHomeData homeData = DoctorHomeData(Get.find());
@@ -73,6 +73,7 @@ class CurrentAppointmentsController extends GetxController {
     } else {
       filteredAppointments = appointmentsList.where((appt) {
         final apptDate = appt.appointmentDate;
+        
         return apptDate.year == selectedDate!.year &&
             apptDate.month == selectedDate!.month &&
             apptDate.day == selectedDate!.day;

@@ -5,12 +5,10 @@ import 'package:med_booking_system/controller/patient/main_patient_screens/home_
 import 'package:med_booking_system/controller/patient/main_patient_screens/main_screen_controller.dart';
 import 'package:med_booking_system/core/class/handling_view.dart';
 import 'package:med_booking_system/core/constants/image_assest.dart';
-import 'package:med_booking_system/data/model/all_model.dart';
-import 'package:med_booking_system/view/widgets/patient/appointment_widgets/appointement_card.dart';
+import 'package:med_booking_system/view/widgets/General/state_empty.dart';
 import 'package:med_booking_system/view/widgets/patient/home_widgets/build_specialties_section.dart';
+import 'package:med_booking_system/view/widgets/patient/home_widgets/center_by_specialty_card.dart';
 import 'package:med_booking_system/view/widgets/patient/home_widgets/custom_main_title.dart';
-import 'package:med_booking_system/view/widgets/patient/home_widgets/doctor_card.dart';
-
 import 'package:med_booking_system/view/widgets/patient/home_widgets/medical_center_card.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -33,9 +31,7 @@ class HomeScreen extends StatelessWidget {
             padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
             child: Column(
               children: [
-                
                 _buildProfileHeader(),
-
                 // const SizedBox(height: 10),
                 // _buildSearchBar(),
               ],
@@ -61,16 +57,15 @@ class HomeScreen extends StatelessWidget {
 
                     _buildSuggestedClinics(),
                     const SizedBox(height: 20),
-                    CustomTitle(title: "Doctors "),
 
-                    _buildDoctorsList(maincontroller.doctors),
-                    const SizedBox(height: 20),
+                    // CustomTitle(title: "Doctors "),
 
+                    // buildDoctorsList(),
+                    // const SizedBox(height: 20),
                     CustomTitle(title: "Upcoming Appointments "),
-                    _buildUpcomingAppointments(),
+                
                     const SizedBox(height: 20),
                     CustomTitle(title: "Health Tips"),
-
                     _buildHealthTips(),
                   ],
                 ),
@@ -80,68 +75,53 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildSearchBar() {
-    return Container(
-      padding: EdgeInsets.symmetric(vertical: 12, horizontal: 10),
-      decoration: BoxDecoration(
-        color: Colors.grey.shade100,
-        borderRadius: BorderRadius.circular(12),
-        // border: Border.all(
-        //   color: Color(0xFFE0E0E0),
-        //   width: 1,
-        // ),
-      ),
-      child: Row(
-        children: [
-          Icon(Icons.search, size: 22, color: Color(0xFF9E9E9E)),
-          SizedBox(width: 12),
-          Text(
-            'Search a doctor , center ',
-            style: TextStyle(fontSize: 14, color: Color(0xFF9E9E9E)),
-          ),
-        ],
-      ),
-    );
-  }
-
   Widget _buildSuggestedClinics() {
     return SizedBox(
       height: Get.height * 0.26,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: controller.medicalCentersList.length,
-        itemBuilder: (context, index) {
-          return MedicalCenterCard(
-            center: controller.medicalCentersList[index],
-          );
-        },
-      ),
+      child:
+          controller.selectedSpecialtyId == 0 &&
+                  controller.medicalCentersList.isEmpty
+              ? buildEmptyState("No Centers Yet", null, Icons.local_hospital)
+              : controller.selectedSpecialtyId != 0 &&
+                  controller.centersAndDoctorsBySpecialtyList.isEmpty
+              ? buildEmptyState(
+                "No Centers Yet",
+                "No Centers with the specialty ${controller.specialtiesList[controller.selectedSpecialtyId].name} ",
+                Icons.local_hospital,
+              )
+              : ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount:
+                    controller.selectedSpecialtyId == 0
+                        ? controller.medicalCentersList.length
+                        : controller.centersAndDoctorsBySpecialtyList.length,
+                itemBuilder: (context, index) {
+                  return controller.selectedSpecialtyId == 0
+                      ? MedicalCenterCard(
+                        center: controller.medicalCentersList[index],
+                      )
+                      : MedicalCenterBySpecialtyCard(
+                        center:
+                            controller.centersAndDoctorsBySpecialtyList[index],
+                      );
+                },
+              ),
     );
   }
 
-  Widget _buildDoctorsList(List<DoctorModel> doctors) {
-    return ListView.builder(
-      shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
-      itemCount: doctors.length,
-      itemBuilder: (context, index) {
-        return DoctorCard(doctor: doctors[index]);
-      },
-    );
-  }
+  // Widget _buildDoctorsList(List<DoctorModel> doctors) {
+  //   return ListView.builder(
+  //     shrinkWrap: true,
+  //     physics: NeverScrollableScrollPhysics(),
+  //     itemCount: doctors.length,
+  //     itemBuilder: (context, index) {
+  //       return DoctorCard(doctor: doctors[index]);
+  //     },
+  //   );
+  // }
 
-  Widget _buildUpcomingAppointments() {
-    return ListView.builder(
-      shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
-      itemCount: maincontroller.upcomingAppointments.length,
-      itemBuilder: (context, index) {
-        return AppointmentCard(
-          appointment: maincontroller.upcomingAppointments[index],
-        );
-      },
-    );
-  }
+  
+
 
   Widget _buildHealthTips() {
     return Container(

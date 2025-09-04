@@ -36,7 +36,7 @@ class ShowDoctorProfleController extends GetxController {
         // print("doctor");
 
         // print(doctor);
-        // update();
+        update();
         return doctor;
       } else {
         // statusRequest = StatusRequest.failure;

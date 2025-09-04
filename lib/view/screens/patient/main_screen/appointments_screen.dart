@@ -174,6 +174,10 @@ class PatientAppointmentsScreen extends StatelessWidget {
                                             onTap: () {
                                               // controller.onAppointmentTap(appt);
                                             },
+                                            onTapCancel: (){
+
+                                              controller.showCancelAppointmentDialog(appt);
+                                            },
                                           ),
                                         ),
                                       );

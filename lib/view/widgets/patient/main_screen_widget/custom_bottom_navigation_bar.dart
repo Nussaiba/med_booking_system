@@ -14,11 +14,36 @@ Widget buildBottomBar(MainScreenController controller) {
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        _buildNavItem(0, 'Home', controller, FontAwesomeIcons.home),
-        _buildNavItem(1, 'Search', controller, FontAwesomeIcons.search),
-        _buildNavItem(2, 'Search', controller, FontAwesomeIcons.calendarAlt),
+        _buildNavItem(
+          0,
+          'Home',
+          controller,
+          FontAwesomeIcons.house,
+          FontAwesomeIcons.houseChimneyWindow,
+        ),
+        _buildNavItem(
+          1,
+          'Search',
+          controller,
+          FontAwesomeIcons.magnifyingGlass,
+          FontAwesomeIcons.magnifyingGlassArrowRight,
+        ),
+        _buildNavItem(
+          2,
+          'Appointments',
+          controller,
 
-        _buildNavItem(3, 'Profile', controller, FontAwesomeIcons.user),
+          FontAwesomeIcons.solidCalendarDays,
+          FontAwesomeIcons.calendarDays,
+        ),
+        _buildNavItem(
+          3,
+          'Profile',
+          controller,
+        
+          FontAwesomeIcons.user,
+            FontAwesomeIcons.solidUser,
+        ),
       ],
     ),
   );
@@ -29,6 +54,7 @@ Widget _buildNavItem(
   String label,
   MainScreenController controller,
   IconData icon,
+  IconData iconisSelected,
 ) {
   final isSelected = controller.selectedIndex.value == index;
 
@@ -54,21 +80,21 @@ Widget _buildNavItem(
                 ]
                 : [],
       ),
-      child: Row(
+      child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           FaIcon(
-            icon,
-            size: isSelected ? 20 : 18,
+            isSelected ? iconisSelected : icon,
+            size: isSelected ? 18 : 16,
             color: isSelected ? Colors.blue[800] : Colors.grey[500],
           ),
 
           if (isSelected) ...[
-            const SizedBox(width: 4),
+            // const SizedBox(width: 4),
             Text(
               label,
               style: TextStyle(
-                fontSize: 12,
+                fontSize: 10,
                 fontWeight: FontWeight.bold,
                 color: Colors.blue[800],
               ),

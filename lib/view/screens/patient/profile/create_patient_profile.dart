@@ -32,7 +32,7 @@ class CreatePatientProfileScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // صورة المريض
+                    
                     CustomProfileImagePicker(
                       file: controller.profilePhoto,
                       onPickImage: controller.getImage,

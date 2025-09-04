@@ -48,10 +48,9 @@ class SearchController extends GetxController {
   List<SearchDoctorModel> doctorsList = [];
   List<SearchCenterModel> centersList = [];
 
-  /// نتائج نهائية للعرض
+  
   List<dynamic> results = [];
 
-  /// تنفيذ البحث
   fetchAdvancedSearch(
     String searchText, {
     String? selectedType,

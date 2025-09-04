@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:med_booking_system/api_link.dart';
+import 'package:med_booking_system/core/constants/image_assest.dart';
 import 'package:med_booking_system/core/constants/routes.dart';
 
 class ProfileHeader extends StatelessWidget {
@@ -28,7 +30,7 @@ class ProfileHeader extends StatelessWidget {
     ImageProvider? imageProvider;
     if (imageUrl != null && imageUrl!.isNotEmpty) {
       imageProvider =
-          isNetworkImage ? NetworkImage(imageUrl!) : AssetImage(imageUrl!) as ImageProvider;
+          isNetworkImage ? NetworkImage("${AppLink.serverimage}/$imageUrl") : AssetImage(AppImageAsset.doctor2) as ImageProvider;
     }
 
     return Container(

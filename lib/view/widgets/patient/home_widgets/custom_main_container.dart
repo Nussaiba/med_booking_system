@@ -5,12 +5,13 @@ import 'package:med_booking_system/core/class/status_request.dart';
 class CustomMainContainer extends StatelessWidget {
   final List<Widget> children;
 final StatusRequest statusRequest;
-  const CustomMainContainer({super.key, required this.children, required this.statusRequest});
+final double height;
+  const CustomMainContainer({super.key, required this.children, required this.statusRequest, required this.height});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height:  MediaQuery.of(context).size.height * 0.85,
+      height: height,
       width: MediaQuery.of(context).size.width * 0.9,
       padding: const EdgeInsets.all(25),
       decoration: BoxDecoration(

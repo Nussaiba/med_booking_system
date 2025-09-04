@@ -1,5 +1,4 @@
-import 'dart:io';
-import 'package:http/http.dart' as http;
+
 import 'package:med_booking_system/api_link.dart';
 import 'package:med_booking_system/core/class/crud.dart';
 
@@ -26,7 +25,7 @@ class BookingData {
       "==========================${AppLink.requestAppointment}==============================",
     );
     print(
-      "====================$doctorId======$centerId=========$requestedDate========$requestedTime============$notes=========",
+      "=============doctor_id=======$doctorId===\n=center_id==$centerId===\n====requested_date==$requestedDate===\n=requested_time====$requestedTime=========note===$notes=========",
     );
     var response = await crud.postData(AppLink.requestAppointment, {
       "doctor_id": doctorId,
@@ -35,6 +34,7 @@ class BookingData {
       "requested_time": requestedTime,
       "notes": notes,
     });
+    
     print("daataaaaaaaaaaaaaaa $response");
     return response.fold((l) => l, (r) => r);
   }

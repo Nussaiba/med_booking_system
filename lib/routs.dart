@@ -9,7 +9,6 @@ import 'package:med_booking_system/view/screens/doctor/main_doctor_screens/main_
 import 'package:med_booking_system/view/screens/patient/auth/register_screen.dart';
 import 'package:med_booking_system/view/screens/auth/success_signup.dart';
 import 'package:med_booking_system/view/screens/auth/verifycode_register.dart';
-import 'package:med_booking_system/view/screens/patient/booking/booking_from_center.dart';
 import 'package:med_booking_system/view/screens/patient/booking/booking_screen.dart';
 import 'package:med_booking_system/view/screens/patient/profile/show_doctor_details_by_other.dart';
 import 'package:med_booking_system/view/screens/patient/main_screen/main_patient_screens.dart';
@@ -54,9 +53,6 @@ List<GetPage<dynamic>>? routes = [
     name: AppRoute.successResetpassword,
     page: () => const SuccessResetPasswordScreen(),
   ),
-
-  GetPage(name: AppRoute.booking, page: () => BookingPage()),
-    GetPage(name: AppRoute.bookingFromCenterScreen, page: () => BookingFromCenterScreen()),
 
   GetPage(name: AppRoute.mainDoctorScreen, page: () => MainDoctorScreens()),
 

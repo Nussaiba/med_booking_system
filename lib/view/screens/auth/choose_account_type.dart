@@ -35,6 +35,7 @@ class ChooseAccountType extends StatelessWidget {
                     const SizedBox(height: 30),
         
                     CustomMainContainer(
+                      height:  MediaQuery.of(context).size.height * 0.55,
                       statusRequest: StatusRequest.none,
 
                       children: [

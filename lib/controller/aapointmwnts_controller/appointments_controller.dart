@@ -10,34 +10,36 @@ class DoctorAppointmentDetailController extends GetxController {
   late StatusRequest statusRequest = StatusRequest.none;
   MyServices myServices = Get.find();
 
-  DoctorAppointmentModel? appointmentModel;
+  // DoctorAppointmentModel? appointmentModel;
+   DoctorAppointmentModel? appointment;
   late String appointementId;
-  getDoctorAppointmentsDetails() async {
-    statusRequest = StatusRequest.loading;
-    var response = await data.getDoctorAppointmentsByIdData(appointementId);
-    print("================$response  Controller");
-    statusRequest = handlingData(response);
-    print(statusRequest);
-    if (StatusRequest.success == statusRequest) {
-      if (response['status'] == 200) {
-        // statusRequest = StatusRequest.loading;
+  // getDoctorAppointmentsDetails() async {
+  //   statusRequest = StatusRequest.loading;
+  //   var response = await data.getDoctorAppointmentsByIdData(appointementId);
+  //   print("================$response  Controller");
+  //   statusRequest = handlingData(response);
+  //   print(statusRequest);
+  //   if (StatusRequest.success == statusRequest) {
+  //     if (response['status'] == 200) {
+  //       // statusRequest = StatusRequest.loading;
+  //       // appointmentModel = DoctorAppointmentModel.fromJson(response['data']);
 
-        appointmentModel = DoctorAppointmentModel.fromJson(response['data']);
-
-        print(" appointmentModel  $appointmentModel");
-        update();
-        return appointmentModel;
-      } else {
-        // statusRequest = StatusRequest.failure;
-      }
-    }
-    update();
-  }
+  //       print(" appointmentModel  $appointmentModel");
+  //       update();
+  //       return appointmentModel;
+  //     } else {
+  //       // statusRequest = StatusRequest.failure;
+  //     }
+  //   }
+  //   update();
+  // }
 
   @override
   void onInit() {
-    appointementId = Get.arguments['appointment_id'].toString();
-    getDoctorAppointmentsDetails();
+    // appointementId = Get.arguments['appointment_id'].toString();
+    // getDoctorAppointmentsDetails();
+appointment = Get.arguments['appointment_model'];
+
     super.onInit();
   }
 }

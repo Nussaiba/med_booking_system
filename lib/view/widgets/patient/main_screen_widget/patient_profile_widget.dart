@@ -168,9 +168,9 @@ Widget buildPersonalInfo(PatientProfileModel p) {
         title: 'Contact Information',
         icon: Icons.contact_mail,
         children: [
-          _buildInfoItem(Icons.email, 'Email', p.personal.contactInfo.email ?? 'Not Available'),
-          _buildInfoItem(Icons.phone, 'Phone', p.personal.contactInfo.phone ?? 'Not Available'),
-          _buildInfoItem(Icons.location_on, 'Address', p.personal.contactInfo.address ?? 'Not Available'),
+          _buildInfoItem(Icons.email, 'Email', p.personal?.contactInfo.email ?? 'Not Available'),
+          _buildInfoItem(Icons.phone, 'Phone', p.personal?.contactInfo.phone ?? 'Not Available'),
+          _buildInfoItem(Icons.location_on, 'Address', p.personal?.contactInfo.address ?? 'Not Available'),
         ],
       ),
       SizedBox(height: 16),
@@ -178,9 +178,9 @@ Widget buildPersonalInfo(PatientProfileModel p) {
         title: 'Personal Details',
         icon: Icons.person_outline,
         children: [
-          _buildInfoItem(Icons.person, 'Gender', p.personal.personalDetails.gender ?? 'Not Available'),
-          _buildInfoItem(Icons.cake, 'Date of Birth', p.personal.personalDetails.birthdate ?? 'Not Available'),
-          _buildInfoItem(Icons.access_time, 'Age', p.personal.personalDetails.age?.toString() ?? 'Not Available'),
+          _buildInfoItem(Icons.person, 'Gender', p.personal?.personalDetails.gender ?? 'Not Available'),
+          _buildInfoItem(Icons.cake, 'Date of Birth', p.personal?.personalDetails.birthdate ?? 'Not Available'),
+          _buildInfoItem(Icons.access_time, 'Age', p.personal?.personalDetails.age?.toString() ?? 'Not Available'),
         ],
       ),
     ],
@@ -193,16 +193,16 @@ Widget buildMedicalInfo(PatientProfileModel p) {
     title: 'Medical Information',
     icon: Icons.local_hospital,
     children: [
-      _buildInfoItem(Icons.healing, 'Condition', p.medical.condition ?? 'Not Available'),
-      _buildInfoItem(Icons.history, 'Medical History', p.medical.medicalHistory ?? 'Not Available'),
-      _buildInfoItem(Icons.warning, 'Allergies', p.medical.allergies ?? 'Not Available'),
-      _buildInfoItem(Icons.medical_services, 'Current Medications', p.medical.currentMedications ?? 'Not Available'),
-      _buildInfoItem(Icons.family_restroom, 'Family History', p.medical.familyMedicalHistory ?? 'Not Available'),
-      _buildInfoItem(Icons.bloodtype, 'Blood Type', p.medical.bloodType ?? 'Not Available'),
-      _buildInfoItem(Icons.height, 'Height', p.medical.height ?? 'Not Available'),
-      _buildInfoItem(Icons.monitor_weight, 'Weight', p.medical.weight ?? 'Not Available'),
-      _buildInfoItem(Icons.calculate, 'BMI', p.medical.bmi?.toStringAsFixed(1) ?? 'Not Available'),
-      _buildInfoItem(Icons.category, 'BMI Category', p.medical.bmiCategory ?? 'Not Available'),
+      _buildInfoItem(Icons.healing, 'Condition', p.medical?.condition ?? 'Not Available'),
+      _buildInfoItem(Icons.history, 'Medical History', p.medical?.medicalHistory ?? 'Not Available'),
+      _buildInfoItem(Icons.warning, 'Allergies', p.medical?.allergies ?? 'Not Available'),
+      _buildInfoItem(Icons.medical_services, 'Current Medications', p.medical?.currentMedications ?? 'Not Available'),
+      _buildInfoItem(Icons.family_restroom, 'Family History', p.medical?.familyMedicalHistory ?? 'Not Available'),
+      _buildInfoItem(Icons.bloodtype, 'Blood Type', p.medical?.bloodType ?? 'Not Available'),
+      _buildInfoItem(Icons.height, 'Height', p.medical?.height ?? 'Not Available'),
+      _buildInfoItem(Icons.monitor_weight, 'Weight', p.medical?.weight ?? 'Not Available'),
+      _buildInfoItem(Icons.calculate, 'BMI', p.medical?.bmi?.toStringAsFixed(1) ?? 'Not Available'),
+      _buildInfoItem(Icons.category, 'BMI Category', p.medical?.bmiCategory ?? 'Not Available'),
     ],
   );
 }
@@ -213,8 +213,8 @@ Widget buildEmergencyInfo(PatientProfileModel p) {
     title: 'Emergency Contact',
     icon: Icons.warning_amber,
     children: [
-      _buildInfoItem(Icons.person, 'Name', p.emergencyContacts.name ?? 'Not Available'),
-      _buildInfoItem(Icons.phone, 'Phone', p.emergencyContacts.phone ?? 'Not Available'),
+      _buildInfoItem(Icons.person, 'Name', p.emergencyContacts?.name ?? 'Not Available'),
+      _buildInfoItem(Icons.phone, 'Phone', p.emergencyContacts?.phone ?? 'Not Available'),
     ],
   );
 }
@@ -225,9 +225,9 @@ Widget buildLifestyleInfo(PatientProfileModel p) {
     title: 'Lifestyle',
     icon: Icons.fitness_center,
     children: [
-      _buildInfoItem(Icons.smoking_rooms, 'Smoking', p.lifestyle.smokingStatus ?? 'Not Available'),
-      _buildInfoItem(Icons.local_bar, 'Alcohol', p.lifestyle.alcoholConsumption ?? 'Not Available'),
-      _buildInfoItem(Icons.sports_gymnastics, 'Notes', p.lifestyle.lifestyleNotes ?? 'Not Available'),
+      _buildInfoItem(Icons.smoking_rooms, 'Smoking', p.lifestyle?.smokingStatus ?? 'Not Available'),
+      _buildInfoItem(Icons.local_bar, 'Alcohol', p.lifestyle?.alcoholConsumption ?? 'Not Available'),
+      _buildInfoItem(Icons.sports_gymnastics, 'Notes', p.lifestyle?.lifestyleNotes ?? 'Not Available'),
     ],
   );
 }
@@ -238,9 +238,9 @@ Widget buildFollowUpInfo(PatientProfileModel p) {
     title: 'Follow Up',
     icon: Icons.schedule,
     children: [
-      _buildInfoItem(Icons.calendar_today, 'Last Visit', p.followUp.lastVisit ?? 'Not Available'),
-      _buildInfoItem(Icons.calendar_month, 'Next Follow-Up', p.followUp.nextFollowUp ?? 'Not Available'),
-      _buildInfoItem(Icons.notes, 'Treatment Notes', p.followUp.treatmentNotes ?? 'Not Available'),
+      _buildInfoItem(Icons.calendar_today, 'Last Visit', p.followUp?.lastVisit ?? 'Not Available'),
+      _buildInfoItem(Icons.calendar_month, 'Next Follow-Up', p.followUp?.nextFollowUp ?? 'Not Available'),
+      _buildInfoItem(Icons.notes, 'Treatment Notes', p.followUp?.treatmentNotes ?? 'Not Available'),
     ],
   );
 }
@@ -251,10 +251,10 @@ Widget buildInsuranceInfo(PatientProfileModel p) {
     title: 'Insurance',
     icon: Icons.verified_user,
     children: [
-      _buildInfoItem(Icons.business, 'Provider', p.insurance.provider ?? 'Not Available'),
-      _buildInfoItem(Icons.confirmation_number, 'Number', p.insurance.number ?? 'Not Available'),
-      _buildInfoItem(Icons.date_range, 'Expiry', p.insurance.expiry ?? 'Not Available'),
-      _buildInfoItem(Icons.warning, 'Is Expired', p.insurance.isExpired == true ? 'Yes' : 'No'),
+      _buildInfoItem(Icons.business, 'Provider', p.insurance?.provider ?? 'Not Available'),
+      _buildInfoItem(Icons.confirmation_number, 'Number', p.insurance?.number ?? 'Not Available'),
+      _buildInfoItem(Icons.date_range, 'Expiry', p.insurance?.expiry ?? 'Not Available'),
+      _buildInfoItem(Icons.warning, 'Is Expired', p.insurance?.isExpired == true ? 'Yes' : 'No'),
     ],
   );
 }
@@ -265,8 +265,8 @@ Widget buildAppointmentsInfo(PatientProfileModel p) {
     title: 'Appointments',
     icon: Icons.event,
     children: [
-      _buildInfoItem(Icons.upcoming, 'Upcoming', p.appointments.upcoming.isEmpty ? 'None' : '${p.appointments.upcoming.length} Appointments'),
-      _buildInfoItem(Icons.history, 'Old', p.appointments.old.isEmpty ? 'None' : '${p.appointments.old.length} Appointments'),
+      // _buildInfoItem(Icons.upcoming, 'Upcoming', p.appointments?.upcoming.isEmpty ? 'None' : '${p.appointments.upcoming.length} Appointments'),
+      // _buildInfoItem(Icons.history, 'Old', p.appointments.old.isEmpty ? 'None' : '${p.appointments.old.length} Appointments'),
     ],
   );
 }
@@ -277,7 +277,7 @@ Widget buildReportsInfo(PatientProfileModel p) {
     title: 'Medical Reports',
     icon: Icons.description,
     children: [
-      _buildInfoItem(Icons.file_copy, 'Reports', p.medicalReports.isEmpty ? 'No Reports' : '${p.medicalReports.length} Reports'),
+      // _buildInfoItem(Icons.file_copy, 'Reports', p.medicalReports?.isEmpty ? 'No Reports' : '${p.medicalReports.length} Reports'),
     ],
   );
 }

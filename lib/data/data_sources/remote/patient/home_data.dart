@@ -1,12 +1,16 @@
-import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:med_booking_system/api_link.dart';
 import 'package:med_booking_system/core/class/crud.dart';
-import 'package:path_provider/path_provider.dart';
 
 class PatientHomeData {
   Crud crud;
   PatientHomeData(this.crud);
+
+  getCentersAndDoctorsBySpecialtyData(String specialtyId) async {
+    print("=========================${AppLink.getCentersAndDoctorsBySpecialty}/$specialtyId/centers-doctors===================================");
+    var response = await crud.getData("${AppLink.getCentersAndDoctorsBySpecialty}/$specialtyId/centers-doctors");
+    return response.fold((l) => l, (r) => r);
+  }
 
   getAllCentersData() async {
     var response = await crud.getData(AppLink.centers);

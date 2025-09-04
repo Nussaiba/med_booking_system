@@ -1,22 +1,52 @@
+
+class PatientProfileResponse {
+  final PatientProfileModel? data;
+
+  PatientProfileResponse({this.data});
+
+  factory PatientProfileResponse.fromJson(Map<String, dynamic> json) {
+    
+    if (json['data'] is List) {
+      return PatientProfileResponse(data: null);
+    }
+
+    if (json['data'] is Map<String, dynamic>) {
+      return PatientProfileResponse(
+        data: PatientProfileModel.fromJson(json['data']),
+      );
+    }
+
+    return PatientProfileResponse(data: null);
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      "data": data?.toJson(),
+    };
+  }
+}
+
+
+
 class PatientProfileModel {
-  final Personal personal;
-  final Medical medical;
-  final EmergencyContact emergencyContacts;
-  final Lifestyle lifestyle;
-  final FollowUp followUp;
-  final Insurance insurance;
-  final Appointments appointments;
-  final List<dynamic> medicalReports;
+  final Personal ?personal;
+  final Medical ?medical;
+  final EmergencyContact ?emergencyContacts;
+  final Lifestyle? lifestyle;
+  final FollowUp ?followUp;
+  final Insurance ?insurance;
+  final Appointments? appointments;
+  final List<dynamic>? medicalReports;
 
   PatientProfileModel({
-    required this.personal,
-    required this.medical,
-    required this.emergencyContacts,
-    required this.lifestyle,
-    required this.followUp,
-    required this.insurance,
-    required this.appointments,
-    required this.medicalReports,
+     this.personal,
+     this.medical,
+     this.emergencyContacts,
+     this.lifestyle,
+   this.followUp,
+     this.insurance,
+     this.appointments,
+     this.medicalReports,
   });
 
   factory PatientProfileModel.fromJson(Map<String, dynamic> json) {
@@ -34,13 +64,13 @@ class PatientProfileModel {
 
   Map<String, dynamic> toJson() {
     return {
-      'personal': personal.toJson(),
-      'medical': medical.toJson(),
-      'emergency_contacts': emergencyContacts.toJson(),
-      'lifestyle': lifestyle.toJson(),
-      'follow_up': followUp.toJson(),
-      'insurance': insurance.toJson(),
-      'appointments': appointments.toJson(),
+      'personal':personal?.toJson(),
+      'medical': medical?.toJson(),
+      'emergency_contacts':emergencyContacts?.toJson(),
+      'lifestyle': lifestyle?.toJson(),
+      'follow_up': followUp?.toJson(),
+      'insurance': insurance?.toJson(),
+      'appointments': appointments?.toJson(),
       'medical_reports': medicalReports,
     };
   }

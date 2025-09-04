@@ -39,14 +39,26 @@ class ShowPatientProfleController extends GetxController {
     statusRequest = handlingData(response);
     print(statusRequest);
     if (StatusRequest.success == statusRequest) {
-      // if (response['status'] == 200) {
+      if (response['status'] == 200) {
       // statusRequest = StatusRequest.loading;
       print(
         "=====================================data====+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++=======================================",
       );
+// final response = PatientProfileResponse.fromJson(await data.getPatientProfilerData());
+      
+
+
+// if (response.data == null) {
+//   print("No profile yet.");
+// } else {
+
+//   print("Email: ${response.data!.personal?.contactInfo.email}");
+//   print("Condition: ${response.data!.medical?.condition}");
+
+
       patientProfileModel = PatientProfileModel.fromJson(response['data']);
 
-      print(" Paitent  ${patientProfileModel}");
+      // print(" Paitent  ${patientProfileModel}");
 
     
       update();
@@ -57,11 +69,16 @@ class ShowPatientProfleController extends GetxController {
       // update();
       return patientProfileModel;
     } else {
-      // statusRequest = StatusRequest.failure;
+        if (response['status'] == 404) {
+  print("No profile yet.");
+ patientProfileModel = null;
+ 
+        }
+      
     }
     // }
     update();
-  }
+  }}
 
   @override
   void onInit() {

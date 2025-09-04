@@ -124,11 +124,6 @@ class CreatePatientProfileControllerImp extends CreatePatientProfileController {
     statusRequest = handlingData(response);
     print(statusRequest);
     if (response['status'] == 200) {
-      // statusRequest = StatusRequest.loading;
-      print(
-        "=====================================data====+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++=======================================",
-      );
-
       CustomSnackbar.show(
         title: "success",
         message: "${response['message']}",

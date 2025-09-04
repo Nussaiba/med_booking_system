@@ -70,6 +70,9 @@ Future<void> pickDate(BuildContext context) async {
             DoctorAppointmentModel.fromJson(dataDoctorAppointments[i]),
           );
         }
+
+            print("========================fetchAppointments===${doctorAppointmentsList.length}==================================");
+
       } else {
         // statusRequest = StatusRequest.failure;
       }

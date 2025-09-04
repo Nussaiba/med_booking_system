@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:med_booking_system/core/class/status_request.dart';
 import 'package:med_booking_system/core/constants/routes.dart';
@@ -8,16 +7,13 @@ import 'package:med_booking_system/data/data_sources/remote/patient/home_data.da
 import 'package:med_booking_system/data/model/patient/daily_schedule_model.dart';
 import 'package:med_booking_system/data/model/patient/doctor_model.dart';
 import 'package:med_booking_system/data/model/patient/medical_center_model.dart';
+import 'package:med_booking_system/data/model/patient/new/ss.dart';
 import 'package:med_booking_system/data/model/patient/specialty_model.dart';
 import 'package:med_booking_system/view/screens/patient/show_center_details.dart';
 
-abstract class PatientHomeController extends GetxController
-    with GetSingleTickerProviderStateMixin {
-  
-}
+abstract class PatientHomeController extends GetxController {}
 
 class PatientHomeControllerImp extends PatientHomeController {
-
   PatientHomeData homeData = PatientHomeData(Get.find());
 
   late StatusRequest statusRequest = StatusRequest.none;
@@ -25,14 +21,14 @@ class PatientHomeControllerImp extends PatientHomeController {
 
   MyServices myServices = Get.find();
   // var isFabVisible = true.obs;
-  List dataSpecialties = [];
-  List<SpecialtyModel> specialtiesList = [];
+
   List dataMedicalCenters = [];
   List<MedicalCenterModel> medicalCentersList = [];
 
   // late String idUserPostOwner;
   // late String account;
-
+  List dataSpecialties = [];
+  List<SpecialtyModel> specialtiesList = [];
   @override
   getSpecialtiesData() async {
     dataSpecialties.clear();
@@ -53,6 +49,9 @@ class PatientHomeControllerImp extends PatientHomeController {
         //     ? statusRequestOpportunity = StatusRequest.failure
         //     : statusRequestOpportunity = StatusRequest.none;
         print("lll ${dataSpecialties.length}");
+        specialtiesList.add(
+          SpecialtyModel(id: 0, name: "all", doctorsCount: 0),
+        );
         for (int i = 0; i < dataSpecialties.length; i++) {
           specialtiesList.add(SpecialtyModel.fromJson(dataSpecialties[i]));
         }
@@ -183,7 +182,7 @@ class PatientHomeControllerImp extends PatientHomeController {
           "=====================================data====+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++=======================================",
         );
         print({response['data']});
-        
+
         print("lll ${dataAvailableSlots.length}");
         for (int i = 0; i < dataAvailableSlots.length; i++) {
           availableSlotsList.add(
@@ -204,11 +203,56 @@ class PatientHomeControllerImp extends PatientHomeController {
   }
 
   // @override
-  goToDoctorDetails(DoctorModel doctor) {
+  goToDoctorDetails() {
     Get.toNamed(
       AppRoute.showDoctorProfileByOther,
-      arguments: {'doctor': doctor},
+      // arguments: {'doctor': doctor},
     );
+  }
+
+  List dataCentersAndDoctorsBySpecialty = [];
+  List<CenterBySpecialtyModel> centersAndDoctorsBySpecialtyList = [];
+  List<DoctorInCenterModel> doctorsList = [];
+
+  getCentersAndDoctorsBySpecialty(String specialtyId) async {
+    doctorsList.clear();
+    dataCentersAndDoctorsBySpecialty.clear();
+    centersAndDoctorsBySpecialtyList.clear();
+    statusRequest = StatusRequest.loading;
+    var response = await homeData.getCentersAndDoctorsBySpecialtyData(
+      specialtyId,
+    );
+    print("================$response  Controller");
+    statusRequest = handlingData(response);
+    if (StatusRequest.success == statusRequest) {
+      if (response['status'] == 200) {
+        dataCentersAndDoctorsBySpecialty.addAll(response['data']['centers']);
+        print({response['data']['centers']});
+        for (int i = 0; i < dataCentersAndDoctorsBySpecialty.length; i++) {
+          centersAndDoctorsBySpecialtyList.add(
+            CenterBySpecialtyModel.fromJson(
+              dataCentersAndDoctorsBySpecialty[i],
+            ),
+          );
+          for (
+            int j = 0;
+            j < centersAndDoctorsBySpecialtyList[i].doctors.length;
+            j++
+          ) {
+            if (!doctorsList.contains(
+              centersAndDoctorsBySpecialtyList[i].doctors[j],
+            )) {
+              doctorsList.add(centersAndDoctorsBySpecialtyList[i].doctors[j]);
+            }
+          }
+        }
+        print(selectedSpecialtyId != 0);
+        print(centersAndDoctorsBySpecialtyList.isEmpty);
+        update();
+      } else {
+        // statusRequest = StatusRequest.failure;
+      }
+    }
   }
 
   // @override
@@ -224,13 +268,26 @@ class PatientHomeControllerImp extends PatientHomeController {
   //   Get.toNamed(AppRoute.postpage);
   // }
 
+  int selectedSpecialtyId = 0;
+  void changeSpecialtyId(int id) {
+    selectedSpecialtyId = id;
+
+    update();
+
+    if (selectedSpecialtyId == 0) {
+      // All
+      getCentersData();
+    } else {
+      getCentersAndDoctorsBySpecialty(selectedSpecialtyId.toString());
+    }
+  }
+
   @override
   void onInit() async {
     super.onInit();
 
     getSpecialtiesData();
     getCentersData();
-
 
     // account = myServices.box.read("account");
     // idUserPostOwner = myServices.box.read("id");

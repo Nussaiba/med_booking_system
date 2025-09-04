@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:med_booking_system/core/constants/image_assest.dart';
-import 'package:med_booking_system/data/data_sources/static/doctor_center.dart';
-import 'package:med_booking_system/data/model/all_model.dart';
 import 'package:med_booking_system/data/model/s.dart';
-
-import 'package:med_booking_system/view/widgets/patient/appointment_widgets/appointement_card.dart';
 
 class MainScreenController extends GetxController {
   final List<Specialty> specialties = [
@@ -16,28 +11,7 @@ class MainScreenController extends GetxController {
     Specialty(icon: FontAwesomeIcons.brain, name: 'Neurology', id: '4'),
     Specialty(icon: FontAwesomeIcons.baby, name: 'Pediatrics', id: '5'),
   ];
-  final List<Appointment> upcomingAppointments = [
-    Appointment(
-      clinicName: "MY CLINICS",
-      address: "Moscow, st. Cosmonaut...",
-      dateTime: DateTime.now().add(Duration(days: 2)),
-      status: AppointmentStatus.upcoming,
-      type: "PHARMACY",
-      imageUrl: AppImageAsset.center2,
-    ),
-    Appointment(
-      clinicName: "MY CLINICS",
-      address: "Moscow, st. Cosmonaut...",
-      dateTime: DateTime.now().add(Duration(days: 2)),
-      status: AppointmentStatus.upcoming,
-      type: "PHARMACY",
-      imageUrl: AppImageAsset.center2,
-    ),
-  ];
-
-  List<DoctorModel> doctors = [];
-
-  List<CenterModel> medicalCenters = [];
+ 
 
   var selectedIndex = 0.obs;
   late PageController pageController;
@@ -59,8 +33,6 @@ class MainScreenController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    pageController = PageController();
-    medicalCenters = centersList;
-    doctors = doctorsList;
+    pageController = PageController();  
   }
 }

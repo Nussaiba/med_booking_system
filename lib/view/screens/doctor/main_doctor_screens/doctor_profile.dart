@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
+import 'package:med_booking_system/api_link.dart';
+
 import 'package:med_booking_system/controller/doctor/main_doctor_screens/show_doctor_profle_controller.dart';
 import 'package:med_booking_system/core/class/handling_view.dart';
 import 'package:med_booking_system/view/screens/doctor/profile/create_doctor_profile.dart';
@@ -28,7 +29,7 @@ class DoctorProfileScreen extends StatelessWidget {
                     name: "Dr. ${user?.fullName}",
                     birthDate:user?.birthdate,
                     // imageUrl: user?.profilePhoto,
-                    imageUrl: null,
+                    imageUrl: user?.profilePhoto,
                     isNetworkImage: true,
                     onEdit: () {
                       Get.to(CreateDoctorProfileScreen());

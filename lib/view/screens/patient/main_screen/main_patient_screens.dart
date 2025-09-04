@@ -8,7 +8,6 @@ import 'package:med_booking_system/view/screens/auth/success_signup.dart';
 import 'package:med_booking_system/view/screens/auth/verifycode_register.dart';
 import 'package:med_booking_system/view/screens/patient/main_screen/search_screen.dart';
 import 'package:med_booking_system/view/screens/patient/profile/show_doctor_details_by_other.dart';
-import 'package:med_booking_system/view/screens/patient/main_screen/appointment_screen.dart';
 import 'package:med_booking_system/view/screens/patient/main_screen/appointments_screen.dart';
 import 'package:med_booking_system/view/screens/patient/main_screen/home_screen.dart';
 import 'package:med_booking_system/view/screens/patient/profile/my_profile_patient.dart';
