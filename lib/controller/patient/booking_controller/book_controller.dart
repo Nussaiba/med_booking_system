@@ -138,7 +138,6 @@ class BookingController extends GetxController {
       return;
     }
 
-    final notesController = TextEditingController();
 
     Get.dialog(
       AlertDialog(

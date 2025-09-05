@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 
+import '../../../data/model/doctor/sp_model.dart';
+
 Widget buildTextFormField(
   IconData icon,
   String hinttext,
@@ -88,6 +90,38 @@ Widget buildDropdownFormField(
 
 
 
+Widget buildSpecialtyDropdownFormField(
+  String labelText,
+  SpecialtyModel? value,
+  List<SpecialtyModel> options,
+  Function(SpecialtyModel?) onChanged,
+) {
+  return Column(
+    children: [
+      DropdownButtonFormField<SpecialtyModel>(
+        value: value,
+        decoration: InputDecoration(
+          hintStyle: const TextStyle(fontSize: 10, color: Colors.grey),
+          label: Container(
+            margin: const EdgeInsets.symmetric(horizontal: 9),
+            child: Text(
+              labelText,
+              style: const TextStyle(fontSize: 14, color: Colors.grey),
+            ),
+          ),
+        ),
+        items: options
+            .map((opt) => DropdownMenuItem<SpecialtyModel>(
+                  value: opt,
+                  child: Text(opt.name), // عرض الاسم
+                ))
+            .toList(),
+        onChanged: onChanged,
+      ),
+      const SizedBox(height: 20),
+    ],
+  );
+}
 
 
 Widget buildDateFormField(

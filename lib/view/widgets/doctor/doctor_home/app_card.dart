@@ -134,24 +134,24 @@ final void Function() onTap;
                     ),
     
                     SizedBox(height: 8),
-                    appointment.appointmentTime != null
-                        ?  Row(children: [
-                       Icon(
-                          Icons.access_time,
-                          size: 14,
-                          color: Colors.grey.shade800,
-                        ),
-                        SizedBox(width: 4),
-                   Text(
-                          appointment.appointmentTime!,
-                          style: TextStyle(
-                            fontSize: 10,
-                            color: Colors.grey.shade600,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        )
+                  //   appointment.appointmentTime != null
+                  //       ?  Row(children: [
+                  //      Icon(
+                  //         Icons.access_time,
+                  //         size: 14,
+                  //         color: Colors.grey.shade800,
+                  //       ),
+                  //       SizedBox(width: 4),
+                  //  Text(
+                  //         appointment.appointmentTime!,
+                  //         style: TextStyle(
+                  //           fontSize: 10,
+                  //           color: Colors.grey.shade600,
+                  //           fontWeight: FontWeight.bold,
+                  //         ),
+                  //       )
                       
-                    ])  : Container(),
+                  //   ])  : Container(),
                   ],
                 ),
               ),

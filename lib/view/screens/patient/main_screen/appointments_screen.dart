@@ -75,6 +75,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:med_booking_system/controller/patient/main_patient_screens/appointements_controller.dart';
 import 'package:med_booking_system/core/class/handling_view.dart';
+import 'package:med_booking_system/view/widgets/General/state_empty.dart';
 import 'package:med_booking_system/view/widgets/patient/appointment_widgets/app2_card.dart';
 
 class PatientAppointmentsScreen extends StatelessWidget {
@@ -145,7 +146,11 @@ class PatientAppointmentsScreen extends StatelessWidget {
                         duration: const Duration(milliseconds: 500),
                         child:
                             controller.patientAppointmentsList.isEmpty
-                                ? _buildEmptyState()
+                                ? buildEmptyState(
+                                  "No ِppointments",
+                                  "You dont have any appointments yet.",
+                                  Icons.event,
+                                )
                                 : ScrollConfiguration(
                                   behavior: ScrollBehavior().copyWith(
                                     scrollbars: false,
@@ -174,9 +179,11 @@ class PatientAppointmentsScreen extends StatelessWidget {
                                             onTap: () {
                                               // controller.onAppointmentTap(appt);
                                             },
-                                            onTapCancel: (){
-
-                                              controller.showCancelAppointmentDialog(appt);
+                                            onTapCancel: () {
+                                              controller
+                                                  .showCancelAppointmentDialog(
+                                                    appt,
+                                                  );
                                             },
                                           ),
                                         ),
@@ -244,59 +251,4 @@ class PatientAppointmentsScreen extends StatelessWidget {
           ),
     );
   }
-
-  Widget _buildEmptyState() {
-    return ScrollConfiguration(
-      behavior: ScrollBehavior().copyWith(scrollbars: false),
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              Icons.calendar_today_outlined,
-              size: 80,
-              color: Colors.blue.shade300,
-            ),
-            SizedBox(height: 20),
-            Text(
-              "No Appointments Yet",
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w600,
-                color: Colors.grey.shade600,
-              ),
-            ),
-            SizedBox(height: 12),
-            Text(
-              "Book your first appointment to get started",
-              style: TextStyle(fontSize: 13, color: Colors.grey.shade500),
-              textAlign: TextAlign.center,
-            ),
-            SizedBox(height: 24),
-            ElevatedButton(
-              onPressed: () {},
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.blue.shade600,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                padding: EdgeInsets.symmetric(horizontal: 24, vertical: 10),
-              ),
-              child: Text(
-                "Book Now",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 13,
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
 }
-
-
-

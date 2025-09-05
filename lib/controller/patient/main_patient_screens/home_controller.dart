@@ -25,8 +25,6 @@ class PatientHomeControllerImp extends PatientHomeController {
   List dataMedicalCenters = [];
   List<MedicalCenterModel> medicalCentersList = [];
 
-  // late String idUserPostOwner;
-  // late String account;
   List dataSpecialties = [];
   List<SpecialtyModel> specialtiesList = [];
   @override

@@ -19,26 +19,10 @@ class MainDoctorScreens extends GetView<MainDoctorScreenController> {
         controller: controller.pageController,
         children: [
           DoctorHomeScreen(),
-          // AppointmentCardDemo(),
           AllAppointmentsScreen(),
-                    DoctorProfileScreen(),
+          DoctorProfileScreen(),
         ],
       ),
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

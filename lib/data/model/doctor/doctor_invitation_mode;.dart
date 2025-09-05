@@ -8,6 +8,8 @@ class DoctorInvitationModel {
   final DateTime? expiresAt;
   final DateTime createdAt;
   final DateTime updatedAt;
+  final String centerName;
+  final String invitedByName;
 
   DoctorInvitationModel({
     required this.id,
@@ -19,6 +21,8 @@ class DoctorInvitationModel {
     this.expiresAt,
     required this.createdAt,
     required this.updatedAt,
+    required this.centerName,
+    required this.invitedByName,
   });
 
   factory DoctorInvitationModel.fromJson(Map<String, dynamic> json) {
@@ -29,9 +33,13 @@ class DoctorInvitationModel {
       invitedBy: json['invited_by'],
       status: json['status'],
       message: json['message'],
-      expiresAt: json['expires_at'] != null ? DateTime.tryParse(json['expires_at']) : null,
+      expiresAt: json['expires_at'] != null
+          ? DateTime.tryParse(json['expires_at'])
+          : null,
       createdAt: DateTime.parse(json['created_at']),
       updatedAt: DateTime.parse(json['updated_at']),
+      centerName: json['center_name'],
+      invitedByName: json['invited_by_name'],
     );
   }
 
@@ -46,6 +54,8 @@ class DoctorInvitationModel {
       'expires_at': expiresAt?.toIso8601String(),
       'created_at': createdAt.toIso8601String(),
       'updated_at': updatedAt.toIso8601String(),
+      'center_name': centerName,
+      'invited_by_name': invitedByName,
     };
   }
 }

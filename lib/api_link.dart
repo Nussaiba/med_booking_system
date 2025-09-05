@@ -33,6 +33,7 @@ class AppLink {
 
   static const String cancelPendingAppointment = "$server/appointments";
   static const String getCenterDetails = "$server/centers";
+   static const String getDoctorDetails = "$server/doctors";
   static const String getCentersAndDoctorsBySpecialty = "$server/specialties";
 
   static const String patientProfile = "$server/patient/profile";
@@ -51,7 +52,8 @@ class AppLink {
   static const String specialtiesSearch = "$server/search/specialties";
   static const String doctorsSearch = "$server/search/doctors";
   static const String centersSearch = "$server/search/centers";
-
+//doctor
+static const String doctorSpecialtiesInRegister = "$server/specialties";
   //doctor_profile
 
   static const String doctorInvitations = "$server/doctor/invitations";

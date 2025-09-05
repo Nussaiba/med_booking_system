@@ -89,7 +89,7 @@ class DoctorHomeControllerImp extends HomeDoctorController {
         print("${dataDoctorAppointments.length}lllllllmmmmmmmmmmlllll");
         dataDoctorAppointments.addAll(response['data']['data']);
         print(
-          "=====================================data====+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++=======================================",
+          "=========================================+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++=======================================",
         );
         print({response['data']});
         // dataopportuntiy.isEmpty
@@ -100,6 +100,7 @@ class DoctorHomeControllerImp extends HomeDoctorController {
           doctorAppointmentsList.add(
             DoctorAppointmentModel.fromJson(dataDoctorAppointments[i]),
           );
+          // print({doctorAppointmentsList[i].appointmentDate});
         }
       } else {
       }  if (response['status'] == 402) {

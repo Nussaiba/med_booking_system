@@ -31,9 +31,17 @@ class Crud {
     //     String patientToken = '45|xyMC11a5e2dlm9v3u38uHhVO0irhSP5u7hYpEn4nc4ac4142';
     headers['Authorization'] = 'Bearer $token';
     print(token);
-  }
+  }Future<Either<StatusRequest, Map>> postData(
+  String linkurl,
+  dynamic data, {
+  bool addContentType = false, 
+}) async {
+  
 
-  Future<Either<StatusRequest, Map>> postData(String linkurl, data) async {
+  if (addContentType) {
+    headers["Content-Type"] = "application/json";
+  }
+    print("==========================data============$data=========================");
     try {
       if (await checkInternet()) {
         Token();
@@ -45,6 +53,7 @@ class Crud {
         print("response $response");
 
         print(response.statusCode);
+         print(response.body);
 
         if (response.statusCode == 200 ||
             response.statusCode == 201 ||

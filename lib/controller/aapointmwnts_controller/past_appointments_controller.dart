@@ -69,9 +69,15 @@ Future<void> pickDate(BuildContext context) async {
           doctorAppointmentsList.add(
             DoctorAppointmentModel.fromJson(dataDoctorAppointments[i]),
           );
+          
+            print({doctorAppointmentsList[i].appointmentDate});
+ if(  {doctorAppointmentsList[i].appointmentDate} == null ){
+     print({doctorAppointmentsList[i].id});
+ }
+
         }
 
-            print("========================fetchAppointments===${doctorAppointmentsList.length}==================================");
+            print("1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111========================fetchAppointments=Past==${doctorAppointmentsList.length}==================================");
 
       } else {
         // statusRequest = StatusRequest.failure;

@@ -26,13 +26,18 @@ class RatingData {
     print(
       "=======================${AppLink.ratingsCenter}===================================",
     );
+     print(
+      "==========$appointmentId============$score==============$comment======================",
+    );
     var response = await crud.postData(
       AppLink.ratingsCenter,
       json.encode({
         "appointment_id": appointmentId,
         "score": score,
         "comment": comment,
-      }),
+      },
+      ),
+      addContentType: true
     );
     return response.fold((l) => l, (r) => r);
   }

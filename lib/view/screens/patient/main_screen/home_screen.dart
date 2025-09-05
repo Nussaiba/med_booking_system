@@ -9,6 +9,7 @@ import 'package:med_booking_system/view/widgets/General/state_empty.dart';
 import 'package:med_booking_system/view/widgets/patient/home_widgets/build_specialties_section.dart';
 import 'package:med_booking_system/view/widgets/patient/home_widgets/center_by_specialty_card.dart';
 import 'package:med_booking_system/view/widgets/patient/home_widgets/custom_main_title.dart';
+import 'package:med_booking_system/view/widgets/patient/home_widgets/home_widgets.dart';
 import 'package:med_booking_system/view/widgets/patient/home_widgets/medical_center_card.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -29,13 +30,7 @@ class HomeScreen extends StatelessWidget {
           padding: const EdgeInsets.all(14.0),
           child: Container(
             padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-            child: Column(
-              children: [
-                _buildProfileHeader(),
-                // const SizedBox(height: 10),
-                // _buildSearchBar(),
-              ],
-            ),
+            child: Column(children: [buildPatientProfileHeader()]),
           ),
         ),
       ),
@@ -63,7 +58,7 @@ class HomeScreen extends StatelessWidget {
                     // buildDoctorsList(),
                     // const SizedBox(height: 20),
                     CustomTitle(title: "Upcoming Appointments "),
-                
+
                     const SizedBox(height: 20),
                     CustomTitle(title: "Health Tips"),
                     _buildHealthTips(),
@@ -120,9 +115,6 @@ class HomeScreen extends StatelessWidget {
   //   );
   // }
 
-  
-
-
   Widget _buildHealthTips() {
     return Container(
       padding: const EdgeInsets.all(16),
@@ -152,60 +144,6 @@ class HomeScreen extends StatelessWidget {
               ),
             ],
           ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildProfileHeader() {
-    return Container(
-      padding: EdgeInsets.only(top: 18),
-
-      child: Row(
-        // crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            width: 60,
-            height: 60,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              // border: Border.all(color: Colors.blue.shade100, width: 2),
-              image: DecorationImage(
-                image: AssetImage(AppImageAsset.doctor4),
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-          SizedBox(width: 20),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Hi, welcome back',
-                  style: TextStyle(color: Colors.grey[600], fontSize: 12),
-                ),
-                SizedBox(height: 2),
-                Text(
-                  'Sledge Hammer',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                ),
-                SizedBox(height: 4),
-              ],
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(right: 6),
-            child: Container(
-              height: 45,
-              width: 45,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(color: Colors.grey.shade200, width: 1),
-              ),
-              child: Icon(FontAwesomeIcons.bell, color: Colors.blue, size: 22),
-            ),
-          ), // onPressed: _editProfile,
         ],
       ),
     );

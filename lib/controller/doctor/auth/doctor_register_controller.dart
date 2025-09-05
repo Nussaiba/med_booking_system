@@ -9,6 +9,7 @@ import 'package:med_booking_system/core/functions/handlingdata.dart';
 import 'package:med_booking_system/core/services/services.dart';
 import 'package:med_booking_system/data/data_sources/choose_image.dart';
 import 'package:med_booking_system/data/data_sources/remote/auth/register.dart';
+import '../../../data/model/doctor/sp_model.dart';
 
 abstract class DoctorRegisterController extends GetxController {
   signUp();
@@ -56,14 +57,9 @@ class DoctorRegisterControllerImp extends DoctorRegisterController {
   String? gender;
   DateTime? birthdate;
   File? profilePhoto;
-  String specialty= 'Cardiology';
+  SpecialtyModel ?specialty;
   final List<String> genders = ['male', 'female'];
-  final List<String> specialties = [
-    'Cardiology',
-    'Dermatology',
-    'Neurology',
-    'Pediatrics',
-  ];
+ 
   ImageAndFileData imageData = ImageAndFileData();
 
  
@@ -117,6 +113,7 @@ class DoctorRegisterControllerImp extends DoctorRegisterController {
 
   onSpecialtyChanged(val) {
     specialty = val;
+    print("===${specialty!.name}===${specialty!.id}=");
     update();
   }
 
@@ -135,7 +132,6 @@ class DoctorRegisterControllerImp extends DoctorRegisterController {
 
 
 
-  @override
   showRePassWord() {
     isShowRePassword = isShowRePassword == true ? false : true;
 
@@ -170,14 +166,14 @@ class DoctorRegisterControllerImp extends DoctorRegisterController {
       gender!,
       address.text,
       aboutMe.text,
-      "1",
-      // selectedSpecialty,
+      specialty!.id.toString(),
+     
       yearsOfExperience.text,
       appointmentDuration.text,
     );
     print("================$response  Controller");
-    Get.snackbar(response['success'].toString(), response['errors'].toString());
-    print(response['errors']);
+    // Get.snackbar(response['success'].toString(), response['errors'].toString());
+    // print(response['errors']);
     statusRequest = handlingData(response);
     print(statusRequest);
     print(response);
@@ -215,8 +211,37 @@ class DoctorRegisterControllerImp extends DoctorRegisterController {
     // } else {}
   }
 
+
+  List dataSpecialties = [];
+  List<SpecialtyModel> specialtiesList = [];
+ 
+  getSpecialtiesData() async {
+    dataSpecialties.clear();
+    specialtiesList.clear();
+    
+    var response = await signUpData.doctorSpecialtiesData();
+    print("================$response  Controller");
+    statusRequest = handlingData(response);
+    if (StatusRequest.success == statusRequest) {
+      if (response['status'] == 200) {
+        print("${dataSpecialties.length}lllllllmmmmmmmmmmlllll");
+        dataSpecialties.addAll(response['data']);
+     
+        print({response['data']});
+        print("lll ${dataSpecialties.length}");
+       
+        for (int i = 0; i < dataSpecialties.length; i++) {
+          specialtiesList.add(SpecialtyModel.fromJson(dataSpecialties[i]));
+        }
+        update();
+      } else {
+        // statusRequest = StatusRequest.failure;
+      }
+    }
+  }
   @override
   void onInit() {
+    getSpecialtiesData();
     username = TextEditingController();
     email = TextEditingController();
     password = TextEditingController();

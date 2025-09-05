@@ -13,13 +13,7 @@ class CenterDetailsController extends GetxController {
   CenterDetailsModel? center;
   late String centerId;
 
-  // delay() async {
-  //   await Future.delayed(const Duration(seconds: 3), () {
-  //     statusRequest = StatusRequest.loading;
-  //     update();
-  //   });
-  // }
-
+ 
   getCenterDetails() async {
     statusRequest = StatusRequest.loading;
     var response = await data.getCenterDetailsData(centerId);

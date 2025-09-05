@@ -3,13 +3,14 @@ import 'package:get/get.dart';
 import 'package:med_booking_system/binding/initialbindinds.dart';
 import 'package:med_booking_system/routs.dart';
 import 'package:med_booking_system/view/screens/auth/choose_account_type.dart';
+import 'package:med_booking_system/view/screens/auth/login_screen.dart';
 import 'package:med_booking_system/view/screens/doctor/appointments_screens/past_appointments.dart';
 import 'package:med_booking_system/view/screens/doctor/appointments_screens/all_appointments.dart';
 import 'package:med_booking_system/view/screens/doctor/auth/doctor_register.dart';
 import 'package:med_booking_system/view/screens/doctor/main_doctor_screens/main_doctor_screens.dart';
 import 'package:med_booking_system/view/screens/doctor/profile/create_doctor_profile.dart';
 import 'package:med_booking_system/view/screens/patient/booking/booking_screen.dart';
-import 'package:med_booking_system/view/screens/patient/booking/rating_doctor.dart';
+import 'package:med_booking_system/view/screens/patient/booking/rating_center.dart';
 import 'package:med_booking_system/view/screens/patient/main_screen/main_patient_screens.dart';
 import 'package:med_booking_system/view/screens/patient/profile/create_patient_profile.dart';
 import 'package:med_booking_system/view/screens/patient/profile/my_profile_patient.dart';
@@ -35,11 +36,11 @@ class MyApp extends StatelessWidget {
       
       // home: MainPatientScreens(),
       // home:  MainDoctorScreens(),
-      home: ChooseAccountType(),
-      
+      // home: ChooseAccountType(),
+      home: LoginScreen(),
       // home:DoctorFeedbackScreen(), 
       // home: PastAppointmentsScreen(),
-      // home: AllAppointmentsScreen (),
+      // home: CenterRatingScreen (),
       getPages: routes,
       initialBinding: InitialBindings(),
 

@@ -4,7 +4,6 @@ import 'package:med_booking_system/controller/doctor/auth/doctor_register_contro
 import 'package:med_booking_system/core/functions/validinput.dart';
 import 'package:med_booking_system/view/widgets/auth_widgets/register_widdets.dart';
 
-
 Widget buildBasicInfoPage(DoctorRegisterControllerImp controller) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.center,
@@ -19,15 +18,21 @@ Widget buildBasicInfoPage(DoctorRegisterControllerImp controller) {
           child: CircleAvatar(
             radius: 36,
             backgroundImage:
-                controller.profilePhoto != null ? FileImage(controller.profilePhoto!) : null,
-            child: controller.profilePhoto == null
-                ? const Icon(Icons.camera_alt, size: 32, color: Colors.white70)
-                : null,
+                controller.profilePhoto != null
+                    ? FileImage(controller.profilePhoto!)
+                    : null,
+            child:
+                controller.profilePhoto == null
+                    ? const Icon(
+                      Icons.camera_alt,
+                      size: 32,
+                      color: Colors.white70,
+                    )
+                    : null,
           ),
         ),
       ),
-        const SizedBox(height: 10),
-
+      const SizedBox(height: 10),
 
       buildTextFormField(
         Icons.person,
@@ -62,8 +67,7 @@ Widget buildBasicInfoPage(DoctorRegisterControllerImp controller) {
         controller.phone,
         null,
         null,
-        (value) =>
-            value == null || value.isEmpty ? "Phone is required" : null,
+        (value) => value == null || value.isEmpty ? "Phone is required" : null,
         keyboardType: TextInputType.phone,
       ),
     ],
@@ -113,10 +117,10 @@ Widget buildProfessionalInfoPage(DoctorRegisterControllerImp controller) {
       const CustomTitle(title: "Professional Information"),
       const SizedBox(height: 20),
 
-      buildDropdownFormField(
+      buildSpecialtyDropdownFormField(
         "Specialty",
         controller.specialty,
-        controller.specialties,
+        controller.specialtiesList,
         (val) => controller.onSpecialtyChanged(val),
       ),
 
@@ -146,20 +150,17 @@ Widget buildProfessionalInfoPage(DoctorRegisterControllerImp controller) {
 
       const SizedBox(height: 20),
 
-      buildCertificateUploader(controller)
-
+      buildCertificateUploader(controller),
     ],
   );
 }
-
-
 
 Widget buildPersonalInfoPage(DoctorRegisterControllerImp controller) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.center,
     children: [
       const CustomTitle(title: "Personal Information"),
-    
+
       const SizedBox(height: 20),
 
       buildDateFormField(
@@ -168,15 +169,12 @@ Widget buildPersonalInfoPage(DoctorRegisterControllerImp controller) {
         controller.pickBirthdate,
       ),
 
-      buildDropdownFormField(
-        "Gender",
-        controller.gender,
-        controller.genders,
-        (val) {
-          controller.gender = val;
-          controller.update();
-        },
-      ),
+      buildDropdownFormField("Gender", controller.gender, controller.genders, (
+        val,
+      ) {
+        controller.gender = val;
+        controller.update();
+      }),
 
       buildTextFormField(
         Icons.home,
@@ -199,7 +197,7 @@ Widget buildPersonalInfoPage(DoctorRegisterControllerImp controller) {
         null,
         null,
         null,
-        
+
         keyboardType: TextInputType.multiline,
       ),
     ],
@@ -226,9 +224,6 @@ class DoctorRegisterPageView extends GetView<DoctorRegisterControllerImp> {
   }
 }
 
-
-
-
 Widget buildCertificateUploader(DoctorRegisterControllerImp controller) {
   return GestureDetector(
     onTap: controller.chooseCertificateFile,
@@ -242,16 +237,25 @@ Widget buildCertificateUploader(DoctorRegisterControllerImp controller) {
       child: Row(
         children: [
           Icon(
-            controller.certificateFile != null ? Icons.check_circle : Icons.upload_file,
-            color: controller.certificateFile != null ? Colors.blue.shade700 : Colors.blue.shade400,
+            controller.certificateFile != null
+                ? Icons.check_circle
+                : Icons.upload_file,
+            color:
+                controller.certificateFile != null
+                    ? Colors.blue.shade700
+                    : Colors.blue.shade400,
             size: 26,
           ),
           const SizedBox(width: 12),
           Expanded(
             child: Text(
-              controller.certificateFile?.path.split('/').last ?? "No file selected",
+              controller.certificateFile?.path.split('/').last ??
+                  "No file selected",
               style: TextStyle(
-                color: controller.certificateFile != null ? Colors.blue.shade900 : Colors.grey.shade600,
+                color:
+                    controller.certificateFile != null
+                        ? Colors.blue.shade900
+                        : Colors.grey.shade600,
                 fontWeight: FontWeight.w500,
                 fontSize: 15,
               ),
@@ -278,8 +282,8 @@ Widget buildCertificateUploader(DoctorRegisterControllerImp controller) {
       ),
     ),
   );
-
 }
+
 class CustomTitle extends StatelessWidget {
   final String title;
   const CustomTitle({super.key, required this.title});
@@ -290,7 +294,11 @@ class CustomTitle extends StatelessWidget {
       children: [
         Text(
           title,
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.blue),
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+            color: Colors.blue,
+          ),
         ),
         SizedBox(height: 10),
       ],

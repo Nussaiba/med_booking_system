@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+import 'package:med_booking_system/api_link.dart';
 import 'package:med_booking_system/controller/doctor/main_doctor_screens/home_doctor_controller.dart';
 import 'package:med_booking_system/controller/patient/main_patient_screens/main_screen_controller.dart';
 import 'package:med_booking_system/core/class/handling_view.dart';
@@ -10,9 +12,7 @@ import 'package:med_booking_system/data/model/doctor/doctor_profile_model.dart';
 import 'package:med_booking_system/data/model/patient/medical_center_model.dart';
 import 'package:med_booking_system/view/screens/patient/show_center_details.dart';
 import 'package:med_booking_system/view/widgets/General/state_empty.dart';
-import 'package:med_booking_system/view/widgets/doctor/appointments_widgets/past_appointments_widgets.dart';
-
-import 'package:med_booking_system/view/widgets/patient/home_widgets/build_specialties_section.dart';
+import 'package:med_booking_system/view/widgets/doctor/appointments_widgets/appointments_widgets.dart';
 import 'package:med_booking_system/view/widgets/patient/home_widgets/custom_main_title.dart';
 
 class DoctorHomeScreen extends StatelessWidget {
@@ -30,7 +30,7 @@ class DoctorHomeScreen extends StatelessWidget {
             widget: Scaffold(
               // backgroundColor: Colors.grey[50],
               appBar: PreferredSize(
-                preferredSize: Size.fromHeight(125),
+                preferredSize: Size.fromHeight(120),
                 child: Padding(
                   padding: const EdgeInsets.all(14.0),
                   child: Container(
@@ -41,7 +41,7 @@ class DoctorHomeScreen extends StatelessWidget {
                       children: [
                         buildProfileHeader(controller.doctor),
                         const SizedBox(height: 10),
-                        // _buildSearchBar(),
+                      
                       ],
                     ),
                   ),
@@ -69,9 +69,9 @@ class DoctorHomeScreen extends StatelessWidget {
                     buildSuggestedClinics(),
                     const SizedBox(height: 20),
                     CustomTitle(title: "Today's Schedule "),
-                   
+
                     const SizedBox(height: 20),
-                    buildA(),
+                    buildAppointments(),
                   ],
                 ),
               ),
@@ -98,28 +98,30 @@ class DoctorHomeScreen extends StatelessWidget {
     );
   }
 
-  Widget buildA() {
-    return 
-    
-    controller.doctorAppointmentsList.isEmpty?
-     buildEmptyState("No Appoinments Yet", "you have not any appointments yet", Icons.event):
-    ListView.builder(
-      shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
-      itemCount: controller.doctorAppointmentsList.length,
-      itemBuilder: (context, index) {
-        final appointment = controller.doctorAppointmentsList[index];
-        // return
-        // AppointmentDoctorCard(appointment:  appointment , onTap:(){ controller.goToAppointmentDetails(appointment.id);});    }
-        return CustomAppointmentCard(
-          appt: appointment,
-          onTap: () {
-            controller.goToAppointmentDetails(appointment);
-            print(appointment);
+  Widget buildAppointments() {
+    return controller.doctorAppointmentsList.isEmpty
+        ? buildEmptyState(
+          "No Appoinments Yet",
+          "you have not any appointments yet",
+          Icons.event,
+        )
+        : ListView.builder(
+          shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
+          itemCount: controller.doctorAppointmentsList.length,
+          itemBuilder: (context, index) {
+            final appointment = controller.doctorAppointmentsList[index];
+            // return
+            // AppointmentDoctorCard(appointment:  appointment , onTap:(){ controller.goToAppointmentDetails(appointment.id);});    }
+            return CustomAppointmentCard(
+              appt: appointment,
+              onTap: () {
+                controller.goToAppointmentDetails(appointment);
+                print(appointment);
+              },
+            );
           },
         );
-      },
-    );
   }
 
   Widget buildProfileHeader(DoctorProfileModel? doctor) {
@@ -136,7 +138,11 @@ class DoctorHomeScreen extends StatelessWidget {
               shape: BoxShape.circle,
               // border: Border.all(color: Colors.blue.shade100, width: 2),
               image: DecorationImage(
-                image: AssetImage(AppImageAsset.doctor4),
+                image: 
+                
+                doctor?.user.profilePhoto != null?
+                NetworkImage("${AppLink.serverimage}/${doctor?.user.profilePhoto}"):
+                AssetImage(AppImageAsset.doctor4),
                 fit: BoxFit.cover,
               ),
             ),
@@ -286,17 +292,17 @@ class MedicalCenterCard extends StatelessWidget {
                 ],
               ),
 
-              Row(
-                children: [
-                  Icon(Icons.location_on, size: 16, color: Colors.grey),
-                  SizedBox(width: 4),
-                  Text(
-                    'Damascus',
-                    // center.centerAddress!,
-                    style: TextStyle(fontSize: 12, color: Colors.grey[600]),
-                  ),
-                ],
-              ),
+              if (center.centerAddress != null)
+                Row(
+                  children: [
+                    Icon(Icons.location_on, size: 16, color: Colors.grey),
+                    SizedBox(width: 4),
+                    Text(
+                      center.centerAddress!,
+                      style: TextStyle(fontSize: 12, color: Colors.grey[600]),
+                    ),
+                  ],
+                ),
             ],
           ),
         ),
@@ -310,7 +316,7 @@ Widget buildInvitationsSection(
   DoctorHomeControllerImp controller,
 ) {
   return SizedBox(
-    height: Get.height * 0.26,
+    height: Get.height * 0.28,
     child: ListView.builder(
       scrollDirection: Axis.horizontal,
       itemCount: invitations.length,
@@ -345,7 +351,7 @@ class DoctorInvitationCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      constraints: const BoxConstraints(maxWidth: 300),
+      constraints: const BoxConstraints(maxWidth: 320),
       margin: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -360,7 +366,7 @@ class DoctorInvitationCard extends StatelessWidget {
         ],
       ),
       child: Padding(
-        padding: const EdgeInsets.all(12),
+        padding: const EdgeInsets.all(8),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -368,13 +374,13 @@ class DoctorInvitationCard extends StatelessWidget {
             Row(
               children: [
                 Container(
-                  padding: const EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
                     color: Colors.blue[50],
                     shape: BoxShape.circle,
                   ),
                   child: Icon(
-                    Icons.medical_services_rounded,
+                    Icons.local_hospital,
                     color: Colors.blue[600],
                     size: 20,
                   ),
@@ -382,10 +388,10 @@ class DoctorInvitationCard extends StatelessWidget {
                 const SizedBox(width: 8),
                 Expanded(
                   child: Text(
-                    "Medical Center Invitation",
+                    invitation.centerName ?? "Medical Center",
                     style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w600,
+                      fontSize: 13,
+                      fontWeight: FontWeight.w700,
                       color: Colors.blueGrey[900],
                     ),
                   ),
@@ -394,36 +400,36 @@ class DoctorInvitationCard extends StatelessWidget {
               ],
             ),
 
-            const SizedBox(height: 10),
+            const SizedBox(height: 8),
 
             /// Message
             Container(
-              padding: const EdgeInsets.all(8),
+              padding: const EdgeInsets.all(6),
               decoration: BoxDecoration(
                 color: Colors.blue[50],
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Text(
-                invitation.message ??
-                    "We are pleased to invite you to join our team.",
-                style: TextStyle(
-                  fontSize: 12,
-                  color: Colors.blueGrey[800],
-                  height: 1.4,
-                ),
+                invitation.message ?? "Welcome to join our medical center.",
+                style: TextStyle(fontSize: 12, color: Colors.blueGrey[800]),
               ),
             ),
 
-            const SizedBox(height: 4),
+            const SizedBox(height: 6),
 
             /// Details
             Wrap(
               spacing: 8,
-              runSpacing: 8,
+              runSpacing: 0,
               children: [
                 _buildDetailItem(
+                  Icons.alternate_email,
+                  "Invited by: ${invitation.invitedByName}",
+                ),
+                _buildDetailItem(
                   Icons.calendar_today,
-                  "Sent: ${_formatDate(invitation.createdAt)}",
+
+                  "Sent: ${DateFormat('yyyy-MM-dd').format(invitation.createdAt)}",
                 ),
                 if (invitation.expiresAt != null)
                   _buildDetailItem(
@@ -432,8 +438,6 @@ class DoctorInvitationCard extends StatelessWidget {
                   ),
               ],
             ),
-
-            // const SizedBox(height: 2),
 
             /// Actions
             Row(
@@ -448,8 +452,8 @@ class DoctorInvitationCard extends StatelessWidget {
                       borderRadius: BorderRadius.circular(8),
                     ),
                     padding: const EdgeInsets.symmetric(
-                      horizontal: 0,
-                      vertical: 0,
+                      horizontal: 12,
+                      vertical: 6,
                     ),
                     textStyle: const TextStyle(fontSize: 11),
                   ),
@@ -465,8 +469,8 @@ class DoctorInvitationCard extends StatelessWidget {
                       borderRadius: BorderRadius.circular(8),
                     ),
                     padding: const EdgeInsets.symmetric(
-                      horizontal: 0,
-                      vertical: 0,
+                      horizontal: 14,
+                      vertical: 6,
                     ),
                     textStyle: const TextStyle(fontSize: 11),
                     elevation: 1,
@@ -515,7 +519,7 @@ class DoctorInvitationCard extends StatelessWidget {
 
   Widget _buildDetailItem(IconData icon, String text) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
       decoration: BoxDecoration(
         color: Colors.grey[50],
         borderRadius: BorderRadius.circular(8),
@@ -537,8 +541,6 @@ class DoctorInvitationCard extends StatelessWidget {
       ),
     );
   }
-
-  String _formatDate(DateTime date) => "${date.day}/${date.month}/${date.year}";
 
   String _getTimeDifference(DateTime expiryDate) {
     final diff = expiryDate.difference(DateTime.now());

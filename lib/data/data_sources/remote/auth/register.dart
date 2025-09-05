@@ -95,4 +95,13 @@ class SignUpData {
     print("daataaaaaaaaaaaaaaa $response");
     return response.fold((l) => l, (r) => r);
   }
+
+  doctorSpecialtiesData() async {
+    print(
+      "=============================${AppLink.doctorSpecialtiesInRegister}============================",
+    );
+
+    var response = await crud.getData(AppLink.doctorSpecialtiesInRegister);
+    return response.fold((l) => l, (r) => r);
+  }
 }

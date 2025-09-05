@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:med_booking_system/controller/aapointmwnts_controller/past_appointments_controller.dart';
 import 'package:med_booking_system/core/constants/image_assest.dart';
@@ -16,7 +17,10 @@ class CustomAppointmentCard extends StatelessWidget {
       child: Card(
         margin: EdgeInsets.symmetric(vertical: 4),
         elevation: 0,
-        color: Colors.blue.shade400.withOpacity(0.04),
+        color
+      : appt.attendanceStatus == "absent"
+          ? Colors.red.shade50
+          : Colors.blue.shade400.withOpacity(0.04),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
           side: BorderSide(color: Colors.grey.shade200, width: 1),
@@ -42,8 +46,14 @@ class CustomAppointmentCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      appt.patient.fullName,
+            appt.patient != null&& appt.patient?.fullName != null ?      Text(
+                      appt.patient!.fullName,
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 14,
+                        color: Colors.blue.shade800,
+                      )):   Text(
+                      " No Name",
                       style: TextStyle(
                         fontWeight: FontWeight.w600,
                         fontSize: 14,
@@ -87,7 +97,7 @@ class CustomAppointmentCard extends StatelessWidget {
                       ],
                     ),
                     SizedBox(height: 6),
-                    Row(
+          if(      appt.attendanceStatus == null )   Row(
                       children: [
                         Icon(
                           Icons.check_circle,
@@ -104,6 +114,36 @@ class CustomAppointmentCard extends StatelessWidget {
                         ),
                       ],
                     ),
+                
+                
+                
+                
+                
+                
+             
+SizedBox(height: 4),
+
+if (appt.attendanceStatus != null) 
+  Row(
+    children: [
+      Icon(
+        Icons.circle,
+        size: 14,
+        color: appt.attendanceStatus == "present"
+            ? Colors.green.shade400
+            : Colors.red.shade400, 
+      ),
+      SizedBox(width: 4),
+      Text(
+        appt.attendanceStatus!.capitalizeFirst ?? appt.attendanceStatus!, 
+        style: TextStyle(
+          fontSize: 12,
+          color: Colors.grey.shade700,
+        ),
+      ),
+    ],
+  ),
+
                   ],
                 ),
               ),

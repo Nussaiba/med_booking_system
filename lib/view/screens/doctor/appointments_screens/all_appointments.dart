@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:med_booking_system/controller/aapointmwnts_controller/curr_appointments_controller.dart';
 import 'package:med_booking_system/controller/aapointmwnts_controller/past_appointments_controller.dart';
 import 'package:med_booking_system/core/class/handling_view.dart';
-import 'package:med_booking_system/view/widgets/doctor/appointments_widgets/past_appointments_widgets.dart';
+import 'package:med_booking_system/view/widgets/General/state_empty.dart';
+import 'package:med_booking_system/view/widgets/doctor/appointments_widgets/appointments_widgets.dart';
 
 class AllAppointmentsScreen extends StatelessWidget {
   final currentController = Get.put(CurrentAppointmentsController());
@@ -47,23 +49,34 @@ class AllAppointmentsScreen extends StatelessWidget {
                         Expanded(
                           child: HandlingDataView(
                             statusRequest: controller.statusRequest,
-                            widget: ListView.builder(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 12,
-                                vertical: 6,
-                              ),
-                              itemCount: controller.filteredAppointments.length,
-                              itemBuilder: (context, index) {
-                                final appt =
-                                    controller.filteredAppointments[index];
-                                return CustomAppointmentCard(
-                                  appt: appt,
-                                  onTap: () {
-                                    controller.onAppointmentTap(appt);
-                                  },
-                                );
-                              },
-                            ),
+                            widget:
+                                controller.filteredAppointments.isEmpty
+                                    ? buildEmptyState(
+                                      "No Appoinments Yet",
+                                      "you have not any appointments at ${controller.selectedDate != null ? DateFormat('yyyy-MM-dd').format(controller.selectedDate!) : "Today"}",
+                                      Icons.event,
+                                    )
+                                    : ListView.builder(
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal: 12,
+                                        vertical: 6,
+                                      ),
+                                      itemCount:
+                                          controller
+                                              .filteredAppointments
+                                              .length,
+                                      itemBuilder: (context, index) {
+                                        final appt =
+                                            controller
+                                                .filteredAppointments[index];
+                                        return CustomAppointmentCard(
+                                          appt: appt,
+                                          onTap: () {
+                                            controller.onAppointmentTap(appt);
+                                          },
+                                        );
+                                      },
+                                    ),
                           ),
                         ),
                       ],
@@ -83,19 +96,31 @@ class AllAppointmentsScreen extends StatelessWidget {
                         Expanded(
                           child: HandlingDataView(
                             statusRequest: controller.statusRequest,
-                            widget: ListView.builder(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 12,
-                                vertical: 6,
-                              ),
-                              itemCount:
-                                  controller.doctorAppointmentsList.length,
-                              itemBuilder: (context, index) {
-                                final appt =
-                                    controller.doctorAppointmentsList[index];
-                                return CustomAppointmentCard(appt: appt);
-                              },
-                            ),
+                            widget:
+                                controller.doctorAppointmentsList.isEmpty
+                                    ? buildEmptyState(
+                                      "No Appoinments Yet",
+                                      " you have not any appointments ${controller.selectedDate != null ? "at ${DateFormat('yyyy-MM-dd').format(controller.selectedDate!)}" : ""}",
+                                      Icons.event,
+                                    )
+                                    : ListView.builder(
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal: 12,
+                                        vertical: 6,
+                                      ),
+                                      itemCount:
+                                          controller
+                                              .doctorAppointmentsList
+                                              .length,
+                                      itemBuilder: (context, index) {
+                                        final appt =
+                                            controller
+                                                .doctorAppointmentsList[index];
+                                        return CustomAppointmentCard(
+                                          appt: appt,
+                                        );
+                                      },
+                                    ),
                           ),
                         ),
                       ],
